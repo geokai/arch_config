@@ -1,0 +1,38 @@
+### gitignore - .config directory repo ###
+
+# misc:
+move_to_.local/
+live-latex-preview
+lyrics
+
+#wallpaper, lockscreen and other images:
+wall.png
+lock.png
+larbs.png
+
+# nvim:
+nvim/colors/
+nvim/plugged/
+nvim/autoload/
+nvim/.netrwhist
+
+# spotify:
+spotify/
+
+#mpd:
+mpd/database
+mpd/log
+mpd/pid
+mpd/state
+mpd/sticker.sql
+
+# mutt:
+mutt/
+
+# newsboat:
+newsboat/urls
+
+# pulse:
+pulse/
+
+### end of .gitignore for .config/ repo ###

@@ -1,0 +1,53 @@
+#!/bin/sh
+# Profile file. Runs on login.
+
+# Adds `~/.scripts` and all subdirectories to $PATH
+export PATH="$PATH:$(du "$HOME/.config/scripts/" | cut -f2 | tr '\n' ':' | sed 's/:*$//' | sed 's|/*$||')"
+
+# Add `~/bin` & `~/bin/local` to the `$PATH`
+if [ -d "$HOME/bin" ]; then
+    PATH="$PATH:$HOME/bin/"
+fi
+
+if [ -d "$HOME/bin/local" ]; then
+    PATH="$PATH:$HOME/bin/local"
+fi
+
+# git completion:
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
+# Disable CTRL-D, avoid accidently terminating shell
+set -o ignoreeof
+
+# programme variables
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="firefox"
+export READER="zathura"
+export FILE="ranger"
+export REFBIB_G="$HOME/Documents/bibliography/bib_groff/biblio.bib"
+export REFBIB_L="$HOME/Documents/bibliography/bib_latex/biblio.bib"
+export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
+export PIX="$HOME/.pix/"
+
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"; a="${a%_}"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"; a="${a%_}"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
+
+[ ! -f ~/.shortcuts ] && shortcuts >/dev/null 2>&1
+
+echo "$0" | grep "bash$" >/dev/null && [ -f ~/.config/dotfiles/bash/bashrc ] && source "$HOME/.config/dotfiles/bash/bashrc"
+
+# Start graphical server if i3 not already running.
+[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx
+
+# Switch escape and caps if tty:
+sudo -n loadkeys ~/.config/scripts/ttymaps.kmap 2>/dev/null

@@ -1,0 +1,16 @@
+[user]
+	name = George Kaimakis
+	email = geoptus@gmail.com
+[color]
+	ui = auto
+[core]
+	editor = vim
+	excludesfile = /home/geoptus/.gitignore_global
+	autocrlf = input
+[alias]
+	lol = log --oneline --decorate --graph
+	lola = log --oneline --decorate --all --graph
+	lop = log --pretty=format:'%h %an %s'
+	shorty = status --short --branch
+[push]
+	default = matching

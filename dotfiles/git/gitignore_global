@@ -1,0 +1,26 @@
+### gitignore - .gitignore_global ###
+
+# system:
+autoconf/log
+etc/mailsynclastrun
+etc/.mailsynclastrun
+.dl
+
+# vim related:
+*.swp
+
+# other text types:
+*~
+*.[oa]
+_*
+*.pyc
+
+# files:
+tags
+
+# misc:
+.gpg
+accounts/
+personal.muttrc
+
+### end of .gitignore_global ###
