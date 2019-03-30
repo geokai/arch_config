@@ -23,7 +23,7 @@ textype() { \
 	}
 
 # if there is a global $REFBIB variable/file for `refer', use it.
-[ -f "$REFBIB" ] && groffbib="-p $REFBIB"
+[ -f "$REFBIB_G" ] && groffbib="-p $REFBIB_G"
 
 
 case "$file" in
