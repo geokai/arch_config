@@ -1,7 +1,6 @@
 ### gitignore - .config directory repo ###
 
 # misc:
-move_to_.local/
 live-latex-preview
 lyrics
 
