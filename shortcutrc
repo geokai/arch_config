@@ -29,4 +29,5 @@ cfu="$EDITOR ~/.config/newsboat/urls" \
 cfn="$EDITOR ~/.config/newsboat/config" \
 cfmb="$EDITOR ~/.config/ncmpcpp/bindings" \
 cfmc="$EDITOR ~/.config/ncmpcpp/config" \
+cfB="$EDITOR ~/.config/i3blocks/config" \
 er="$EDITOR ~/.referbib" \

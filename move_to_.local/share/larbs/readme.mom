@@ -1,4 +1,5 @@
 .de LI
+/
 .LIST
 .SHIFT_LIST 10p
 ..
@@ -91,7 +92,7 @@ If you just want black and white icons, you should actually just be able to unin
 .FOOTNOTE END
 .PP
 The i3blocks config is \f(CW~/.config/i3blocks/config\fP, which you can access by the
-terminal shortcut \f(CWcfib\fP. Notice that the config file refers to several module
+terminal shortcut \f(CWcfB\fP. Notice that the config file refers to several module
 scripts in the \f(CW~/.scripts/\fP directory. You can read a summary of all of these
 scripts in the file \f(CW~/.scripts/SCRIPTS.md\fP.
 .HEADING 2 "Deeper Tutorials"
@@ -306,7 +307,7 @@ buttons, screen brightness, email, web browsing buttons, etc.) to what you
 would expect.
 .HEADING 1 "Bookmarking Files and Directories"
 .PP
-Note the files \f(CW~/.bmdirs\fP and \f(CW~/.bmfiles\fP.
+Note the files \f(CW~/.config/bmdirs\fP and \f(CW~/.config/bmfiles\fP.
 These files hold bookmarked directories and files respectively, along with shortcut keys to their left.
 LARBS, specfically the \f(CWshortcuts\fP script, will automatically read these files and autogenerate aliases and shortcuts for bash/zsh and ranger from them.
 .PP
