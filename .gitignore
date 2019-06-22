@@ -34,4 +34,17 @@ newsboat/urls
 # pulse:
 pulse/
 
+# dconf:
+dconf/user
+
+# FreeCad:
+FreeCAD/
+
+# QCad:
+QCAD/
+QtProject*
+
+# menus:
+menus/
+
 ### end of .gitignore for .config/ repo ###
