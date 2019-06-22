@@ -1,4 +1,4 @@
-##############################################################################
+
 ## This is the example configuration file. Copy it to $HOME/.ncmpcpp/config ##
 ## or $XDG_CONFIG_HOME/ncmpcpp/config and set up your preferences.          ##
 ##############################################################################
@@ -11,14 +11,14 @@
 ## ncmpcpp.
 ##
 #
-ncmpcpp_directory = ~/.config/ncmpcpp
+ncmpcpp_directory = /home/geoptus/.config/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ~/.config/lyrics
+lyrics_directory = /home/geoptus/.config/ncmpcpp/lyrics
 #
 ##### connection settings #####
 #
@@ -30,7 +30,7 @@ lyrics_directory = ~/.config/lyrics
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = "~/Music"
+mpd_music_dir = "/home/geoptus/Music"
 #
 #mpd_crossfade_time = 5
 #
@@ -49,7 +49,7 @@ mpd_music_dir = "~/Music"
 ## }
 ##
 #
-#visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_fifo_path = /tmp/mpd.fifo
 #
 ##
 ## Note: Below parameter is needed for ncmpcpp to determine which output
@@ -71,7 +71,7 @@ mpd_music_dir = "~/Music"
 ## that sane values start with >=10.
 ##
 #
-#visualizer_sync_interval = 30
+visualizer_sync_interval = 10
 #
 ##
 ## Note: To enable spectrum frequency visualization you need to compile ncmpcpp
@@ -80,16 +80,21 @@ mpd_music_dir = "~/Music"
 #
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
-visualizer_type = spectrum
+visualizer_type = wave
 #
 #visualizer_look = ●卐
+visualizer_look = *卐
 #visualizer_look = 卐
 #
-#visualizer_color = blue, cyan, green, yellow, magenta, red
+# visualizer_color = blue, cyan, green, yellow, magenta, red
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
-#visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
+# Default:
+# visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
+
+# Orange Crush:
+visualizer_color = 203, 173, 215, 179, 185, 192, 229, 231, 226, 256
 #
 ##### system encoding #####
 ##
@@ -110,11 +115,11 @@ visualizer_type = spectrum
 ## Time of inactivity (in seconds) after playlist highlighting will be disabled
 ## (0 = always on).
 ##
-#playlist_disable_highlight_delay = 5
+playlist_disable_highlight_delay = 2
 #
 ## Defines how long messages are supposed to be visible.
 ##
-message_delay_time = 1
+message_delay_time = 3
 #
 ##### song format #####
 ##
@@ -193,11 +198,11 @@ alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
 #
 alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
-current_item_prefix = $(cyan)$r$b
+current_item_prefix = $(yellow)$r$b
 #
 current_item_suffix = $/r$(end)$/b
 #
-current_item_inactive_column_prefix = $(magenta)$r
+current_item_inactive_column_prefix = $(203)$r
 #
 current_item_inactive_column_suffix = $/r$(end)
 #
@@ -283,11 +288,11 @@ current_item_inactive_column_suffix = $/r$(end)
 #
 #playlist_show_mpd_host = no
 #
-#playlist_show_remaining_time = no
+# playlist_show_remaining_time = no
 #
 #playlist_shorten_total_times = no
 #
-#playlist_separate_albums = no
+playlist_separate_albums = no
 #
 ##
 ## Note: Possible display modes: classic, columns.
@@ -318,7 +323,7 @@ browser_display_mode = columns
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-progressbar_look = ->
+progressbar_look = |||
 #
 ## Available values: database, playlist.
 ##
@@ -326,7 +331,7 @@ progressbar_look = ->
 #
 ## Available values: classic, alternative.
 ##
-#user_interface = classic
+user_interface = alternative
 #
 #data_fetching_delay = yes
 #
@@ -342,7 +347,7 @@ media_library_albums_split_by_date = no
 #
 #default_tag_editor_pattern = %n - %t
 #
-#header_visibility = yes
+# header_visibility = no
 #
 #statusbar_visibility = yes
 #
@@ -416,13 +421,13 @@ startup_screen = media_library
 #
 #ask_before_clearing_playlists = yes
 #
-#clock_display_seconds = no
+clock_display_seconds = yes
 #
-display_volume_level = no
+display_volume_level = yes
 #
 #display_bitrate = no
 #
-#display_remaining_time = no
+display_remaining_time = yes
 #
 ## Available values: none, basic, extended, perl.
 ##
@@ -509,11 +514,11 @@ use_console_editor = yes
 ## are used there is a possibility that you'll be able to use only colors with
 ## transparent background.
 #
-#colors_enabled = yes
+colors_enabled = yes
 #
-empty_tag_color = magenta
+empty_tag_color = yellow
 #
-#header_window_color = magenta
+header_window_color = 203_235
 #
 #volume_color = default
 #
@@ -521,21 +526,21 @@ empty_tag_color = magenta
 #
 #state_flags_color = default:b
 #
-main_window_color = white
+main_window_color = 203_235
 #
 #color1 = white
 #
 #color2 = green
 #
-progressbar_color = black:b
-#
-progressbar_elapsed_color = blue:b
+progressbar_color = 233_235:b
+
+progressbar_elapsed_color = 203_235:b
 #
 statusbar_color = red
 #
-statusbar_time_color = cyan:b
+statusbar_time_color = 203:b
 #
-#player_state_color = default:b
+player_state_color = red:b
 #
 #alternative_ui_separator_color = black:b
 #
