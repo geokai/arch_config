@@ -47,4 +47,10 @@ QtProject*
 # menus:
 menus/
 
+# ncmpcpp - music player:
+ncmpcpp/error.log
+
+# vifm:
+vifm/vifminfo
+
 ### end of .gitignore for .config/ repo ###
