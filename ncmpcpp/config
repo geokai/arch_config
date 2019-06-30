@@ -62,7 +62,7 @@ visualizer_fifo_path = /tmp/mpd.fifo
 ##
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
-#visualizer_in_stereo = yes
+visualizer_in_stereo = yes
 #
 ##
 ## Note: Below parameter defines how often ncmpcpp has to "synchronize"
@@ -80,10 +80,14 @@ visualizer_sync_interval = 10
 #
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
-visualizer_type = wave
+# visualizer_type = wave
+# visualizer_type = spectrum
+# visualizer_type = ellipse
+visualizer_type = wave_filled
 #
 #visualizer_look = ●卐
-visualizer_look = *卐
+# visualizer_look = *卐
+visualizer_look = "+|"
 #visualizer_look = 卐
 #
 # visualizer_color = blue, cyan, green, yellow, magenta, red
@@ -324,6 +328,7 @@ browser_display_mode = columns
 ## part of progressbar.
 ##
 progressbar_look = |||
+# progressbar_look = ___
 #
 ## Available values: database, playlist.
 ##

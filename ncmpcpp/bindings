@@ -190,8 +190,8 @@
 #def_key "end"
 #  move_end
 #
-#def_key "insert"
-#  select_item
+def_key "insert"
+  select_item
 #
 #def_key "enter"
 #  enter_directory

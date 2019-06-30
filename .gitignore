@@ -19,9 +19,10 @@ nvim/.netrwhist
 spotify/
 
 #mpd:
-mpd/database
-mpd/log
-mpd/pid
+mpd/playlists/
+mpd/mpd.db
+mpd/mpd.log
+mpd/mpd.pid
 mpd/state
 mpd/sticker.sql
 
