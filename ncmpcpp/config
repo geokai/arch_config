@@ -81,9 +81,9 @@ visualizer_sync_interval = 10
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
 # visualizer_type = wave
-# visualizer_type = spectrum
+visualizer_type = spectrum
 # visualizer_type = ellipse
-visualizer_type = wave_filled
+# visualizer_type = wave_filled
 #
 #visualizer_look = ●卐
 # visualizer_look = *卐
