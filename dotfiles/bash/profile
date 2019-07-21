@@ -1,6 +1,8 @@
 #!/bin/sh
 # Profile file. Runs on login.
 
+source bashrc
+
 # Adds `~/.scripts` and all subdirectories to $PATH
 export PATH="$PATH:$(du "$HOME/.config/scripts/" | cut -f2 | tr '\n' ':' | sed 's/:*$//' | sed 's|/*$||')"
 
@@ -17,9 +19,6 @@ fi
 if [ -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
 fi
-
-# Disable CTRL-D, avoid accidently terminating shell
-set -o ignoreeof
 
 # programme variables
 export EDITOR="nvim"

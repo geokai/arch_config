@@ -10,6 +10,7 @@ alias ka="killall" \
 	trem="transmission-remote" \
 	e="$EDITOR" \
 	v="$EDITOR" \
+    nv="nvim"
 	x="sxiv -ft *" \
 	sdn="sudo shutdown -h now" \
 	gua="git remote | xargs -L1 git push --all" \
@@ -27,7 +28,7 @@ alias ka="killall" \
 	ref="shortcuts >/dev/null; source ~/.shortcuts" \
 	upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
 	lsp="pacman -Qett --color=always | less" \
-	tree="tree -A" \
+	tree="tree -Aa" \
     tn="tmux new-session -s" \
     ta="tmux attach -t" \
     tl="tmux ls" \
