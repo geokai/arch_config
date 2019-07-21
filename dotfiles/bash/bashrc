@@ -2,6 +2,9 @@
 stty -ixon # Disable ctrl-s and ctrl-q.
 shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
 
+# Disable CTRL-D, avoid accidently terminating shell
+set -o ignoreeof
+
 HISTCONTROL="erasedups:ignoreboth"
 HISTIGNORE="clear:exit:cd:pwd:ls:la:ll:lx:lf:ld:ls -l:history"
 HISTSIZE= HISTFILESIZE= # Infinite history.
