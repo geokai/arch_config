@@ -54,4 +54,7 @@ ncmpcpp/error.log
 # vifm:
 vifm/vifminfo
 
+# bash-git-prompt:
+bash-git-prompt/
+
 ### end of .gitignore for .config/ repo ###
