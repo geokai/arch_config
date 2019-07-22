@@ -28,7 +28,7 @@ alias ka="killall" \
 	ref="shortcuts >/dev/null; source ~/.shortcuts" \
 	upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
 	lsp="pacman -Qett --color=always | less" \
-	tree="tree -Aa" \
+	tree="tree -A" \
     tn="tmux new-session -s" \
     ta="tmux attach -t" \
     tl="tmux ls" \
