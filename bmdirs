@@ -10,5 +10,6 @@ vv	~/Videos
 cf	~/.config
 sc	~/.config/scripts
 bn  ~/bin
+bl  ~/bin/local
 mn	/mnt
 

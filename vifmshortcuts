@@ -43,6 +43,10 @@ map gbn :cd ~/bin<CR>
 map tbn <tab>:cd ~/bin<CR><tab>
 map Mbn <tab>:cd ~/bin<CR><tab>:mo<CR>
 map Ybn <tab>:cd ~/bin<CR><tab>:co<CR>
+map gbl :cd ~/bin/local<CR>
+map tbl <tab>:cd ~/bin/local<CR><tab>
+map Mbl <tab>:cd ~/bin/local<CR><tab>:mo<CR>
+map Ybl <tab>:cd ~/bin/local<CR><tab>:co<CR>
 map gmn :cd /mnt<CR>
 map tmn <tab>:cd /mnt<CR><tab>
 map Mmn <tab>:cd /mnt<CR><tab>:mo<CR>
