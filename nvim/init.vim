@@ -1,3 +1,14 @@
+"                      _
+"   ___  ___ ___ _  __(_)_ _
+"  / _ \/ -_) _ \ |/ / /  ' \
+" /_//_/\__/\___/___/_/_/_/_/
+"
+"                      ____                    __  _
+"       _______  ___  / _(_)__ ___ _________ _/ /_(_)__  ___
+"      / __/ _ \/ _ \/ _/ / _ `/ // / __/ _ `/ __/ / _ \/ _ \
+"      \__/\___/_//_/_//_/\_, /\_,_/_/  \_,_/\__/_/\___/_//_/
+"                        /___/
+
 " neovim config file - ~/.config/nvim/init.vim
 " Author: George Kaimakis
 " Github: https://github.com/geokai
@@ -127,6 +138,11 @@ nnoremap <F5> <ESC>o# Author: George Kaimakis - https://github.com/geokai<ESC>o<
 " use relative numbering - Use 'vim-unimpaired' [or & ]or, to toggle: =or
 " inoremap <silent> <leader>u <esc>:set relativenumber!<CR>a
 " nnoremap <silent> <leader>u :set relativenumber!<CR><esc>
+
+" run any command written on a line as if in the shell (cursor on line)
+" and replace the line (command) with the result:
+" e.g. date --date='@0' --> Thu Jan  1 01:00:00 BST 1970
+nnoremap Q !!sh<CR>
 
 " Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
 vnoremap <C-c> "+y
