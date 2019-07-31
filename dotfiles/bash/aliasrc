@@ -41,3 +41,17 @@ shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o
 se() { du -a ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
 sv() { vcopy "$(du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf)" ;}
 vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+# virtual environments:
+
+# create a virtual environment - ensure shell is at the project root
+# directory:
+venv_make(){
+	python -m venv $HOME/Documents/virtualenvs/${PWD##*/}
+}
+
+# start the virtual environment - ensure shell is at the project root
+# directory:
+venv_start(){
+	source $HOME/Documents/virtualenvs/${PWD##*/}/bin/activate
+}
