@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# helper functions:
+# hmmm must research the functionality of this function:
+shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+# find and open a file in your fav editor:
+se() { du -a ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+# not sure what this does!
+sv() { vcopy "$(du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf)" ;}
+# another fuzzy-finder!?:
+vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+
+# Virtual Environments:
+# create a virtual environment - ensure shell is at the project root directory:
+venv_make(){
+	python -m venv $VENV_DIR/${PWD##*/}
+}
+
+# start the virtual environment - ensure shell is at the project root directory:
+venv_start(){
+	source $VENV_DIR/${PWD##*/}/bin/activate
+}
