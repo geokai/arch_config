@@ -12,7 +12,7 @@ etc/.mailsynclastrun
 # other text types:
 *~
 *.[oa]
-_*
+# _* - might need this to be included in source control!
 *.pyc
 
 # files:
