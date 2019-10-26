@@ -17,6 +17,9 @@
 # export FILE="ranger"
 # export TERMINAL="st"
 
+# notifications on i3 start-up:
+exec_always --no-startup-id notify-send -i ~/.config/scripts/larbs.png 'Welcome to LARBS: Press Super+F1 for the manual.' -t 10000
+
 # #---Basic Definitions---# #
 # Needed for i3-gaps
 for_window [class="^.*"] border pixel 2
@@ -415,4 +418,3 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 ##bindsym XF86Battery		exec
 ##bindsym XF86Bluetooth		exec
 bindsym XF86WLAN		exec $netrefresh
-exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
