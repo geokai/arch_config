@@ -2,6 +2,7 @@
 alias h="cd ~/ && ls -A" \
 d="cd ~/Documents && ls -A" \
 D="cd ~/Downloads && ls -A" \
+P="cd ~/Programs && ls -A" \
 m="cd ~/Music && ls -A" \
 pp="cd ~/Pictures && ls -A" \
 pl="cd ~/Pictures/Wallpapers/Landscapes && ls -A" \
