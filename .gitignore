@@ -12,6 +12,7 @@ larbs.png
 # nvim:
 nvim/colors/
 nvim/plugged/
+nvim/local-plugs/
 nvim/autoload/
 nvim/.netrwhist
 
