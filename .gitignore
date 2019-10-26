@@ -58,4 +58,7 @@ vifm/vifminfo
 # bash-git-prompt:
 bash-git-prompt/
 
+# vifm history:
+vifm/vifminfo
+
 ### end of .gitignore for .config/ repo ###
