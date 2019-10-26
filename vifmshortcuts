@@ -11,6 +11,10 @@ map gD :cd ~/Downloads<CR>
 map tD <tab>:cd ~/Downloads<CR><tab>
 map MD <tab>:cd ~/Downloads<CR><tab>:mo<CR>
 map YD <tab>:cd ~/Downloads<CR><tab>:co<CR>
+map gP :cd ~/Programs<CR>
+map tP <tab>:cd ~/Programs<CR><tab>
+map MP <tab>:cd ~/Programs<CR><tab>:mo<CR>
+map YP <tab>:cd ~/Programs<CR><tab>:co<CR>
 map gm :cd ~/Music<CR>
 map tm <tab>:cd ~/Music<CR><tab>
 map Mm <tab>:cd ~/Music<CR><tab>:mo<CR>
