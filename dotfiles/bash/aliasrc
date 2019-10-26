@@ -1,5 +1,6 @@
 #!/bin/sh
 alias ka="killall" \
+    sudo="sudo " \
 	mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
 	magit="nvim -c Magit" \
 	p="sudo pacman" \
