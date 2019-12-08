@@ -1,0 +1,25 @@
+!! set_01 colors - stating point
+!! 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+!! 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
+*background: #000000
+*foreground: #ffffff
+*.color0: #101010
+*.color1: #cc0000
+*.color2: #00aa00
+*.color3: #aa5500
+*.color4: #5555ff
+*.color5: #cc00cc
+*.color6: #00dddd
+*.color7: #aaaaaa
+*.color8: #000000
+*.color9: #ff2200
+*.color10: #00ee00
+*.color11: #ffff00
+*.color12: #8888cc
+*.color13: #ff00ff
+*.color14: #00ffff
+*.color15: #ffffff
+!!!! Transparency (0-255):
+st.alpha: 235
+!! Set a default font and font size as below:
+!! *.font: Monospace-14;
