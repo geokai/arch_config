@@ -5,7 +5,7 @@
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Custom"
 
-  Time12a="\$(date +%H:%M)"
+  Time12a="\$(date +%H:%M:%S)"
   PathShort="\W";
 
   ## These are the color definitions used by gitprompt.sh
@@ -47,6 +47,7 @@ override_git_prompt_colors() {
   GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${BoldBlue}${PathShort}${ResetColor}"
   # GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_ ${GIT_PROMPT_START_USER}"
   # GIT_PROMPT_END_USER=" \n${White}${Time12a}${ResetColor} $ "
+  GIT_PROMPT_END_USER=" \n${BoldYellow}\u${White}@${BoldGreen}${Time12a}${ResetColor} $ "
   # GIT_PROMPT_END_ROOT=" \n${White}${Time12a}${ResetColor} # "
 
   ## Please do not add colors to these symbols

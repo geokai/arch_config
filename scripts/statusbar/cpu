@@ -1,12 +1,26 @@
 #!/bin/sh
 
+c_temp=$(sensors | awk '/Core 0/ {print $3}')
+ # "°C"
+
+# Get the xresources colors:
+# 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+# 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
+for x in "$(xrdb -query | grep color | grep -iv URxvt | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
+
+
+# Block 'click' functionality - 1:left, 2:scroll wheel click, 3:right
 case $BLOCK_BUTTON in
-	1) notify-send "<b>🖥 CPU hogs</b>:
-$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
-	3) notify-send "<b>🖥 CPU module:</b>
+    1) dunstmerge nf_right-top gr_bg-settings && notify-send "Cpu temp: $c_temp" "\n\n<b>Cpu Hogs:</b>\n$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
+	3) dunstmerge nf_right-top gr_bg-settings && notify-send "  CPU module:" "
 - Shows CPU temperature.
-- Click to show intensive processes.
-- % is of single core." ;;
+- Click to show most cpu intensive processes.
+- % is of a single core." ;;
 esac
 
-sensors | awk '/Core 0/ {print $3}'
+
+color="$color11"
+printf "<span color='%s'><b>%s</b></span>%+.1f°C\n" "$color" "CPU " " $c_temp"
+# echo " $c_temp"
+
+# vim: ft=sh

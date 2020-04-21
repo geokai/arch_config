@@ -15,7 +15,7 @@ alias ka="killall" \
 	x="sxiv -ft *" \
 	sdn="sudo shutdown -h now" \
 	gua="git remote | xargs -L1 git push --all" \
-	ls="ls -hNF --color=auto --group-directories-first" \
+	ls="ls -NF --color=auto --group-directories-first" \
 	la="ls -A" \
 	ll="ls -lA" \
 	lf="ls -l" \

@@ -17,3 +17,7 @@ case $BLOCK_BUTTON in
     5) mpc next   | filter ;;  # scroll down, next
     *) mpc status | filter ;;
 esac
+
+
+# display the 'artist - track' on the status bar:
+printf "%s\n" "$(filter)"

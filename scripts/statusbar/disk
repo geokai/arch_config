@@ -4,17 +4,33 @@
 # $1 should be drive mountpoint
 # $2 is optional icon, otherwise mountpoint will displayed
 
-[ -z "$1" ] && exit
 
+[ -z "$1" ] && exit
 icon="$2"
 [ -z "$2" ] && icon="$1"
+[[ "$icon" == "/home" ]] && icon="$(echo $icon | sed 's|/||' | tr '[:lower:]' '[:upper:]')"
+[[ "$icon" == "/" ]] && icon="DISK"
 
+
+# Get the xresources colors:
+# 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+# 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
+for x in "$(xrdb -query | grep color | grep -iv URxvt | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
+
+
+# acquire disk useage:
+disk_status="$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"
+
+
+# Block 'click' functionality - 1:left, 2:scroll wheel click, 3:right
 case $BLOCK_BUTTON in
-	1) pgrep -x dunst >/dev/null && notify-send "<b>💽 Disk space:</b>
+	1) dunstmerge nf_right-top gr_bg-settings && notify-send "Disk space" "
 $(df -h --output=target,used,size)" ;;
-	3) pgrep -x dunst >/dev/null && notify-send "<b>💽 Hard drive space remaining:</b>
+	3) dunstmerge nf_right-top gr_bg-settings && notify-send "  Hard drive module:" "
 - Shows used hard drive space.
 - Click to show all disk info." ;;
 esac
 
-printf "%s: %s" "$icon" "$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"
+
+color="$color3"
+printf "<span color='%s'><b>%s</b></span> %s\n" "$color" "$icon" "$disk_status"

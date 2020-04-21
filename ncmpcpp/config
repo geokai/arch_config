@@ -81,9 +81,9 @@ visualizer_sync_interval = 10
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
 # visualizer_type = wave
-visualizer_type = spectrum
+# visualizer_type = spectrum
 # visualizer_type = ellipse
-# visualizer_type = wave_filled
+visualizer_type = wave_filled
 #
 #visualizer_look = ●卐
 # visualizer_look = *卐
@@ -317,7 +317,7 @@ browser_display_mode = columns
 #
 #seek_time = 1
 #
-#volume_change_step = 2
+volume_change_step = 1
 #
 #autocenter_mode = no
 #
@@ -553,3 +553,5 @@ player_state_color = red:b
 #
 #active_window_border = red
 #
+
+# vim: ft=cfg

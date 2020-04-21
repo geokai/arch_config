@@ -90,8 +90,8 @@ if has("autocmd")
     filetype on
     autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 noexpandtab
+    autocmd FileType css setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
 endif
 
@@ -111,7 +111,8 @@ set colorcolumn=+1
 set background=dark
 set cursorline
 highlight cursorline ctermbg=234 ctermfg=none cterm=none
-highlight colorcolumn ctermbg=darkred
+highlight ColorColumn ctermbg=232
+call matchadd('ColorColumn', '\%81v', 100)
 highlight! link TermCursor Cursor
 highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
 highlight nontext ctermfg=darkgrey ctermbg=none
@@ -130,8 +131,8 @@ set complete=.,w,b,u,t,i,kspell
 " Useful F-key mappings:---------------------------------------------------{{{1
 nnoremap <F2> <ESC>i#!/bin/bash<ESC>o<ESC>
 nnoremap <F3> <ESC>i#!/usr/local/bin/python3<ESC>o<ESC>
-nnoremap <F4> <ESC>o# This file was created on <ESC>:r!date "+\%x"<ESC>kJ0<ESC>
-nnoremap <F5> <ESC>o# Author: George Kaimakis - https://github.com/geokai<ESC>o<ESC>
+nnoremap <F4> <ESC>o# Author: George Kaimakis - https://github.com/geokai<ESC>o<ESC>
+nnoremap <F5> <ESC>a# This file was created on <ESC>:r!date "+\%x"<ESC>kJ0<ESC>
 
 " Re-Mappings:-------------------------------------------------------------{{{1
 " Toggle relativenumber:
@@ -181,6 +182,13 @@ inoremap <leader>[ []<ESC>i
 inoremap <leader>t[ [  ]<ESC>hi
 inoremap <leader>{ {}<ESC>i
 inoremap <leader>< <><ESC>i
+
+" set up function block:
+inoremap <leader>{{ {}<ESC>i<CR><ESC><<O
+" set up docstring:
+inoremap <leader>ds """"""<ESC>hhi
+nnoremap <leader>ds a""""""<ESC>hhi
+
 " surround a word with ... pairs - Use 'vim-surround'
 " nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 " nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
@@ -189,12 +197,11 @@ inoremap <leader>< <><ESC>i
 " nnoremap <leader>< viw<esc>a><esc>hbi<<esc>lel
 " nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
 " nnoremap <leader>__ viw<esc>a__<esc>hbi__<esc>lel
+
 " exit pair(s) to end of line:
 inoremap <c-l> <ESC>A
 " exit nested pair to within parent pair:
 inoremap <c-j> <ESC>la
-" set up function block:
-inoremap <leader>{{ {}<ESC>i<CR><ESC><<O
 
 " Disable the arrow keys:--------------------------------------------------{{{2
 " : in NORMAL mode
@@ -227,11 +234,11 @@ let g:EasyMotion_do_mapping = 0
 " line-wise motion:
 let g:EasyMotion_startofline = 0
 
-map <localleader>j <Plug>(easymotion-j)
-map <localleader>J <Plug>(easymotion-sol-j)
+map <silent> <localleader>j <Plug>(easymotion-j)
+map <silent> <localleader>J <Plug>(easymotion-sol-j)
 " nmap <localleader>j <Plug>(easymotion-overwin-line)
-map <localleader>k <Plug>(easymotion-k)
-map <localleader>K <Plug>(easymotion-sol-k)
+map <silent> <localleader>k <Plug>(easymotion-k)
+map <silent> <localleader>K <Plug>(easymotion-sol-k)
 " nmap <localleader>k <Plug>(easymotion-overwin-line)
 
 " Turn on case insensitive feature:
@@ -239,13 +246,13 @@ let g:EasyMotion_smartcase = 1
 
 " Mappings:
 " -bd- for bidirectional motion with word-wise
-map <localleader>w <Plug>(easymotion-bd-w)
-nmap <localleader>w <Plug>(easymotion-bd-w)
-map <localleader>W <Plug>(easymotion-bd-W)
+map <silent> <localleader>w <Plug>(easymotion-bd-w)
+nmap <silent> <localleader>w <Plug>(easymotion-bd-w)
+map <silent> <localleader>W <Plug>(easymotion-bd-W)
 
 " end-of-word motion
-map <localleader>e <Plug>(easymotion-bd-e)
-map <localleader>E <Plug>(easymotion-bd-E)
+map <silent> <localleader>e <Plug>(easymotion-bd-e)
+map <silent> <localleader>E <Plug>(easymotion-bd-E)
 
 " Navigation:--------------------------------------------------------------{{{1
 " Shortcutting split navigation, saving a keypress:
@@ -293,7 +300,7 @@ set foldtext=MyFoldText()
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Goyo plugin makes text more readable when writing prose:
-nnoremap <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+nnoremap <leader>f :Goyo \| set bg=dark \| set linebreak<CR>
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 " nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
@@ -326,6 +333,7 @@ let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
+autocmd BufRead,BufNewFile *.rasi set filetype=css
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
@@ -456,18 +464,18 @@ vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 	autocmd FileType html inoremap ù &ugrave;
 
 """MARKDOWN:---------------------------------------------------------------{{{1
-	autocmd Filetype markdown,rmd nnoremap <leader>w yiWi[<esc>Ea](<esc>pa)
-	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-	autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-	autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-	autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
-	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
-	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
-	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+	autocmd Filetype markdown,rmd,md nnoremap <leader>w yiWi[<esc>Ea](<esc>pa)
+	autocmd Filetype markdown,rmd,md inoremap ,n ---<Enter><Enter>
+	autocmd Filetype markdown,rmd,md inoremap ,b ****<++><Esc>F*hi
+	autocmd Filetype markdown,rmd,md inoremap ,s ~~~~<++><Esc>F~hi
+	autocmd Filetype markdown,rmd,md inoremap ,e **<++><Esc>F*i
+	autocmd Filetype markdown,rmd,md inoremap ,h ====<Space><++><Esc>F=hi
+	autocmd Filetype markdown,rmd,md inoremap ,i ![](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd,md inoremap ,a [](<++>)<++><Esc>F[a
+	autocmd Filetype markdown,rmd,md inoremap ,1 #<Space><Enter><++><Esc>kA
+	autocmd Filetype markdown,rmd,md inoremap ,2 ##<Space><Enter><++><Esc>kA
+	autocmd Filetype markdown,rmd,md inoremap ,3 ###<Space><Enter><++><Esc>kA
+	autocmd Filetype markdown,rmd,md inoremap ,l --------<Enter>
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO

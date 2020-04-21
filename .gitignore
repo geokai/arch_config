@@ -37,6 +37,7 @@ newsboat/urls
 pulse/
 
 # dconf:
+dconf
 dconf/user
 
 # FreeCad:

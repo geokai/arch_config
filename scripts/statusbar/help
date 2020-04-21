@@ -2,8 +2,8 @@
 
 case $BLOCK_BUTTON in
     1) groff -mom ~/.local/share/larbs/readme.mom -Tpdf | zathura - ;;
-    3) pgrep -x dunst >/dev/null && notify-send "<b>❓ Help module:</b>
+    3) pgrep -x dunst >/dev/null && notify-send " " "<b>❓ Help module:</b>
 - Left click to open LARBS guide.";;
 esac
 
-echo "❓"
+echo "❓ "

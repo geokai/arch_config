@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+# Display the time and date in a notification with formatting for five seconds.
+# '+%a %d %b %Y' '+%H:%M:%S'
+# date_now=$(date "+%T  %d/%m/%Y")
+
+# configure dunst for clock-settings:
+dunstmerge nf_right-bottom gr_bg-settings
+
+
+i=5
+while ((i>0))
+do
+    dunstify -r 42 " " "<span color='grey' font='monospace 16'><b>$(date '+%a %d %b %Y  ')</b></span><span font='monospace 22'><span color='yellow'><b>$(date '+%T')</b></span></span>"
+    sleep 1
+    i=$((i-1))
+done
+dunstify -C 42

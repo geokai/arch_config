@@ -1,11 +1,29 @@
 #!/bin/sh
 
+# painful hack to get around the lack of fp in bash - convoluted 'ceiling' func
+m_free=$(free -h --si | awk '/^Mem:/ {print $3 "/" $2}')
+# m_free+=$(($(free -h --si | awk '/^Mem:/ {print $2}' | sed 's/G$//' | cut -d '.' -f1) + 1))
+# m_free+=$(echo $m_free | awk '{print "G"}')
+
+
+# Get the xresources colors:
+# 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+# 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
+for x in "$(xrdb -query | grep color | grep -iv URxvt | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
+
+
+# Block 'click' functionality - 1:left, 2:scroll wheel click, 3:right
 case $BLOCK_BUTTON in
-	1) notify-send "<b>🧠 Memory hogs:</b>
+	1) dunstmerge nf_right-top gr_bg-settings && notify-send "RAM $m_free" "<b>\n\nMemory hogs:</b>
 $(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
-	3) notify-send "<b>🧠 Memory module:</b>
+	3) dunstmerge nf_right-top gr_bg-settings && notify-send " " "<b>Memory module:</b>
 - Shows Memory Used/Total.
 - Click to show memory hogs." ;;
 esac
 
-free -h | awk '/^Mem:/ {print $3 "/" $2}'
+
+color="$color10"
+printf "<span color='%s'><b>%s</b></span>%s\n" "$color" "MEM " "$m_free"
+# echo " $m_free"
+
+# vim: ft=sh

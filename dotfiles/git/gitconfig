@@ -6,7 +6,7 @@
 [core]
 	editor = vim
 	excludesfile = /home/geoptus/.gitignore_global
-	autocrlf = input
+	autocrlf = false
 [alias]
 	lol = log --oneline --decorate --graph
 	lola = log --oneline --decorate --all --graph
@@ -14,3 +14,6 @@
 	shorty = status --short --branch
 [push]
 	default = matching
+
+
+# vim: ft=cfg
