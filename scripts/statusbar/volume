@@ -1,10 +1,10 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e pulsemixer --color 1 --no-mouse & ;;
+	1) i3-msg -q "exec --no-startup-id $TERMINAL -f mono:pixelsize=10 pulsemixer --color 1" ;;
 	2) pulsemixer --toggle-mute ;;
-	4) pulsemixer --change-volume +5 ;;
-	5) pulsemixer --change-volume -5 ;;
+	4) pulsemixer --change-volume -5 ;;
+	5) pulsemixer --change-volume +5 ;;
 	3) dunstmerge nf_right-top gr_bg-settings && dunstify "  📢 Volume module:" "
 - Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.

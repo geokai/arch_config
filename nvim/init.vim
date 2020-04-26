@@ -40,7 +40,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'  " Easier/Powerful vim motions
 Plug 'scrooloose/nerdtree'  " Vim file browsing
 Plug 'jistr/vim-nerdtree-tabs'  " Nerdtree independent of tabs
-Plug 'junegunn/goyo.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
@@ -48,7 +47,14 @@ Plug 'vimwiki/vimwiki'  " Make your own wiki
 Plug 'bling/vim-airline'  " Cool status bar
 Plug 'christoomey/vim-sort-motion'  " Sorting: linewise, character, block etc
 Plug 'ying17zi/vim-live-latex-preview'  " LaTeX coolness
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/rainbow_parentheses.vim'  " Colorful nested parens - sweet!
+Plug 'guns/vim-sexp',       {'for': 'clojure'}
+Plug 'liquidz/vim-iced',    {'for': 'clojure'}
 call plug#end()
+
+" Enable vim-iced's default key mapping
+let g:iced_enable_default_key_mappings = v:true
 
 " General setup:-----------------------------------------------------------{{{1
 let mapleader = ","
@@ -93,6 +99,7 @@ if has("autocmd")
     autocmd FileType html setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType clojure setlocal ts=2 sts=2 sw=2 expandtab
 endif
 
 set wrap
@@ -129,10 +136,10 @@ set complete=.,w,b,u,t,i,kspell
 " Ctrl-p:------------------------------------------------------------------{{{1
 
 " Useful F-key mappings:---------------------------------------------------{{{1
-nnoremap <F2> <ESC>i#!/bin/bash<ESC>o<ESC>
-nnoremap <F3> <ESC>i#!/usr/local/bin/python3<ESC>o<ESC>
-nnoremap <F4> <ESC>o# Author: George Kaimakis - https://github.com/geokai<ESC>o<ESC>
-nnoremap <F5> <ESC>a# This file was created on <ESC>:r!date "+\%x"<ESC>kJ0<ESC>
+nnoremap <silent> <F2> <ESC>i#!/bin/bash<ESC>o<ESC>
+nnoremap <silent> <F3> <ESC>i#!/usr/local/bin/python3<ESC>o<ESC>
+nnoremap <silent> <F4> <ESC>o# Author: George Kaimakis - https://github.com/geokai<ESC>o<ESC>
+nnoremap <silent> <F5> <ESC>a# This file was created on <ESC>:r!date "+\%d \%b \%Y"<ESC>kJ0<ESC>
 
 " Re-Mappings:-------------------------------------------------------------{{{1
 " Toggle relativenumber:
@@ -263,7 +270,7 @@ map <silent> <localleader>E <Plug>(easymotion-bd-E)
 
 " navigating between vim tabs
 nnoremap <leader>n <ESC>:tabn<CR>
-nnoremap <leader>p <ESC>:tabp<CR>
+nnoremap <leader>N <ESC>:tabp<CR>
 
 " Folding:-----------------------------------------------------------------{{{1
 highlight Foldcolumn ctermfg=Darkgrey ctermbg=0 cterm=BOLD
@@ -353,6 +360,13 @@ autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 nnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+
+" Clojure configuration
+" activate rainbow-parens on file type
+augroup rainbow_lisp
+    autocmd!
+    autocmd FileType lisp,clojure,scheme RainbowParentheses
+augroup END
 
 """LATEX:------------------------------------------------------------------{{{1
 	" Word count:

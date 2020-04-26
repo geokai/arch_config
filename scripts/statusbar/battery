@@ -2,6 +2,8 @@
 # Usage: battery <battery name> - eg battery BAT0
 
 # extract xresources colors and assign to color variables:
+# 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+# 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
 for x in "$(xrdb -query | grep color | grep -iv URxvt | sed "s/.*\./export /g;s/:\s*/=\"/g;s/$/\"/g")"; do eval "$x"; done
 
 case $BLOCK_BUTTON in

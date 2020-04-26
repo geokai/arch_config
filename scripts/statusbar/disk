@@ -32,5 +32,5 @@ $(df -h --output=target,used,size)" ;;
 esac
 
 
-color="$color3"
+color="$color9"
 printf "<span color='%s'><b>%s</b></span> %s\n" "$color" "$icon" "$disk_status"

@@ -30,10 +30,10 @@ cal_info(){
 
 color1="$color7"
 color2="$color11"
-printf "<span color='%s'><b>%s</b></span> <span color='%s'><b>%s</b></span>\n" "$color1" "$(date '+%a %d %m %Y')" "$color2" "$(date '+%H:%M:%S')"
+printf "<span color='%s'>%s</span> <span color='%s'><b>%s</b></span>\n" "$color1" "$(date '+%a %d %m %Y')" "$color2" "$(date '+%H:%M:%S')"
 
 case $BLOCK_BUTTON in
     1) pgrep -x dunst >/dev/null; dunstmerge cal_right-top gr_bg-settings && calandar_send && appointments ;;
 	2) pgrep -x dunst >/dev/null && cal_info ;;
-	3) "$TERMINAL" -e calcurse ;;
+	3) i3-msg -q "exec --no-startup-id $TERMINAL -f mono:pixelsize=10 -e calcurse"  ;;
 esac

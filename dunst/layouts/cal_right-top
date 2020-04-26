@@ -130,7 +130,7 @@
     # Markup is allowed
     # format = "<b>%s</b>\n%b"
     # format = "%b\n<b>%s</b>"
-    format = "%b"
+    format = "%s %b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".

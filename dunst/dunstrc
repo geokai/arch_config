@@ -8,13 +8,13 @@
 #  ░░██████░░██████ ███  ░██ ██████   ░░██ ░███   ░░█████ 
 #   ░░░░░░  ░░░░░░ ░░░   ░░ ░░░░░░     ░░  ░░░     ░░░░░  
 #
-# layout:nf_right-bottom
+# layout:nf_right-top
 
 [global]
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = 0
+    monitor = 1
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -41,8 +41,8 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    ## bottom-right
-    geometry = "500x5-10-10"
+    ## top-left
+    geometry = "500x5-15+35"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -77,7 +77,7 @@
     frame_width = 0
 
     # Defines color of the frame around the notification window.
-    frame_color = "#F0F0F0"
+    frame_color = "#ffe000"
 
     # Define a color for the separator.
     # possible values are:
@@ -142,11 +142,11 @@
     # Markup is allowed
     # format = "<b>%s</b>\n%b"
     # format = "%b\n<b>%s</b>"
-    format = "<b>%b</b>"
+    format = "<b>%s</b> %b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
-    alignment = center
+    alignment = left
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
