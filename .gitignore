@@ -3,6 +3,13 @@
 # misc:
 live-latex-preview
 lyrics
+google-chrome/
+VirtualBox/
+Atom/
+GIMP/
+enchant/
+gedit/
+dunst/
 
 #wallpaper, lockscreen and other images:
 wall.png
@@ -12,6 +19,7 @@ larbs.png
 # nvim:
 nvim/colors/
 nvim/plugged/
+nvim/pack/
 nvim/local-plugs/
 nvim/autoload/
 nvim/.netrwhist

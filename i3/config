@@ -53,22 +53,23 @@ font pango:monospace 8
 focus_follows_mouse no
 
 # #---Dropdown Windows---# #
-
 # General dropdown window traits. The order can matter.
-# for_window [instance="st"] floating enable
 
 # terminal windows generally:
 for_window [instance="st"] floating enable
 for_window [instance="st"] border normal
 for_window [instance="st"] resize set 800 600
 for_window [instance="st"] move position center
+
 # spotify:
 for_window [title="Spotify Premium"] border pixel 2
+
 # the audio mixer:
 for_window [title="pulsemixer"] floating enable
 for_window [title="pulsemixer"] border normal
 for_window [title="pulsemixer"] resize set 500 250
 for_window [title="pulsemixer"] move position center
+
 # the dropdowns:
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
@@ -99,7 +100,9 @@ exec_always --no-startup-id mpdupdate
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
 
-# Set Xresources colors:
+# Get and Set the Xresources colors:
+# 0:darkblack, 1:darkred,  2:darkgreen, 3:darkyellow, 4:darkblue, 5:darkmagenta, 6:darkcyan, 7:darkwhite,
+# 8:black,     9:red,     10:green,    11:yellow,    12:blue,    13:magenta,    14:cyan,    15:white
 set_from_resource $darkblack	color0  #101010
 set_from_resource $darkred	    color1  #cc0000
 set_from_resource $darkgreen	color2  #00aa00
@@ -151,11 +154,6 @@ bindsym $mod+Shift+Escape 	    exec --no-startup-id prompt "Exit i3?" "i3-msg ex
 bindsym $mod+q			        [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+r		    reload
 
-# Stop/Hide Everything:
-set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
-mode "$freeze" { bindsym $mod+Shift+f mode "default"
-}
-bindsym $mod+Shift+f		    mode "$freeze" ;; exec --no-startup-id notify-send "Distraction-free mode activated. Press Super+Shift+f to return."
 bindsym $mod+x			        exec --no-startup-id mpc pause; exec --no-startup-id pauseallmpv ; exec pulsemixer --mute ; exec --no-startup-id i3lock -tef -c 553311 -i ~/.config/lock.png
 bindsym $mod+Shift+Delete	    exec --no-startup-id lmc truemute ; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e $FILE
 
@@ -182,11 +180,14 @@ bindsym $mod+Shift+n		    floating toggle; sticky toggle; exec --no-startup-id b
 bindsym $mod+o			        sticky toggle
 bindsym $mod+b			        bar mode toggle
 # bindsym $mod+b			    exec --no-startup-id polybar-msg cmd toggle
-bindsym $mod+f			        fullscreen toggle
-bindsym $mod+t			        split toggle
+bindsym $mod+Shift+f			fullscreen toggle
+bindsym $mod+f			        split toggle
 bindsym $mod+Shift+space 	    floating toggle
 bindsym $mod+space		        focus mode_toggle
 bindsym $mod+Escape		        workspace prev
+bindsym $mod+v                  layout toggle split
+bindsym $mod+t                  layout tabbed
+bindsym $mod+c                  layout stacking
 
 # Focus/Moving:
 bindsym $mod+h			        focus left
@@ -210,7 +211,6 @@ bindsym $mod+Shift+Return	    exec --no-startup-id samedir "-f mono:pixelsize=12
 bindsym $mod+grave		        exec --no-startup-id dmenuunicode
 bindsym $mod+a			        exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a		    exec --no-startup-id $term -f mono:pixelsize=10 -e pulsemixer --color 1 --no-mouse
-# bindsym $mod+c
 bindsym $mod+Shift+c		    exec --no-startup-id camtoggle
 bindsym $mod+d			        exec --no-startup-id rofi -show run -theme striPaper android_notification
 bindsym $mod+e			        exec $term -e neomutt && pkill -RTMIN+12 i3blocks
@@ -222,8 +222,7 @@ bindsym $mod+n			        exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 bindsym $mod+Shift+q		    exec --no-startup-id manview
 bindsym $mod+r 			        exec $term $file
 bindsym $mod+u			        exec --no-startup-id ddspawn tmuxdd
-bindsym $mod+v			        exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
-# bindsym $mod+Shift+v
+bindsym $mod+Shift+v			exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
 bindsym $mod+w			        exec $term -e nmtui
 bindsym $mod+Shift+w		    exec --no-startup-id $BROWSER
 bindsym $mod+y			        exec $term -e calcurse
@@ -232,24 +231,34 @@ bindsym $mod+y			        exec $term -e calcurse
 # bindsym $mod+BackSpace
 # bindsym $mod+asciitilde
 
+
+# #---Redundant Functionality---# #
+# Stop/Hide Everything:
+# set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
+# mode "$freeze" { bindsym $mod+Shift+f mode "default"
+# }
+# bindsym void  mode "$freeze" ;; exec --no-startup-id notify-send "Distraction-free mode activated. Press Super+Shift+f to return."
+
+
 # #---Workspace Bindings---# #
 bindsym $mod+Home		        workspace $ws1
 bindsym $mod+Shift+Home		    move container to workspace $ws1
 bindsym $mod+End		        workspace $ws10
 bindsym $mod+Shift+End		    move container to workspace $ws10
-bindsym $mod+Prior		        workspace prev
-bindsym $mod+Shift+Prior	    move container to workspace prev
-bindsym $mod+Next		        workspace next
-bindsym $mod+Shift+Next		    move container to workspace next
 bindsym $mod+Tab		        workspace back_and_forth
-bindsym $mod+XF86Back		    workspace prev
-bindsym $mod+Shift+XF86Back	    move container to workspace prev
-bindsym $mod+XF86Forward	    workspace next
-bindsym $mod+Shift+XF86Forward	move container to workspace next
-bindsym $mod+apostrophe		    split horizontal ;; exec $term
-bindsym $mod+slash		        split vertical ;; exec $term
-bindsym $mod+Shift+slash	    kill
 bindsym $mod+backslash		    workspace back_and_forth
+
+# bindsym $mod+Prior		        workspace prev
+# bindsym $mod+Shift+Prior	    move container to workspace prev
+# bindsym $mod+Next		        workspace next
+# bindsym $mod+Shift+Next		    move container to workspace next
+# bindsym $mod+XF86Back		    workspace prev
+# bindsym $mod+Shift+XF86Back	    move container to workspace prev
+# bindsym $mod+XF86Forward	    workspace next
+# bindsym $mod+Shift+XF86Forward	move container to workspace next
+# bindsym $mod+apostrophem
+# bindsym $mod+slash
+# bindsym $mod+Shift+slash
 
 set $ws1 "1"
 set $ws2 "2"
@@ -306,8 +315,8 @@ bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 bindsym $mod+F5		exec --no-startup-id $netrefresh
-bindsym $mod+F6		exec --no-startup-id torwrap
-bindsym $mod+F7		exec --no-startup-id td-toggle
+# bindsym $mod+F6		exec --no-startup-id torwrap
+# bindsym $mod+F7		exec --no-startup-id td-toggle
 bindsym $mod+F8		exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
@@ -367,5 +376,4 @@ bindsym XF86WLAN		                exec $netrefresh
 # bindsym XF86KbdBrightnessDown         exec
 # bindsym XF86KbdBrightnessUp	        exec
 # bindsym XF86KbdLightOff	            exec
-
 

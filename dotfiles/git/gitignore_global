@@ -22,5 +22,6 @@ tags
 .gpg
 accounts/
 personal.muttrc
+htop
 
 ### end of .gitignore_global ###
