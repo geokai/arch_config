@@ -2,9 +2,12 @@
 
 # _pid=$$
 # echo $$
+ID=$1
+URGENCY=$2
+MESSAGE=$3
 
 # set a trap:
-trap 'dunstify -C $1; exit' SIGTERM SIGINT SIGHUP
+trap 'dunstify -C $ID; exit' SIGTERM SIGINT SIGHUP
 
 [ ${#} != 3 ] 2>/dev/null && echo -e "Issue a flashing dunstify message.\n\tUseage: flash_msg <id> <low|normal|critical> <message>" && exit 1
 
@@ -15,8 +18,8 @@ dunstmerge cal_ni_ns_right-top gr_bg-settings
 _delay=1
 while true
 do
-    dunstify -r $1 -u $2 " " "$3"
+    dunstify -r $ID -u $URGENCY " " "$MESSAGE"
     sleep $_delay
-    dunstify -C $1
+    dunstify -C $ID
     sleep $_delay
 done
