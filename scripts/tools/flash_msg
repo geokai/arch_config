@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# _pid=$$
+# echo $$
+
+# set a trap:
+trap 'dunstify -C $1; exit' SIGTERM SIGINT SIGHUP
+
+[ ${#} != 3 ] 2>/dev/null && echo -e "Issue a flashing dunstify message.\n\tUseage: flash_msg <id> <low|normal|critical> <message>" && exit 1
+
+# printf "%s\n" "${@}"
+
+dunstmerge cal_ni_ns_right-top gr_bg-settings
+
+_delay=1
+while true
+do
+    dunstify -r $1 -u $2 " " "$3"
+    sleep $_delay
+    dunstify -C $1
+    sleep $_delay
+done

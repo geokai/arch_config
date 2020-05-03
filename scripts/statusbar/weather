@@ -29,7 +29,7 @@ weather_now
 
 # status bar 'weather block' left-click - 1)
 display_additional() {
-    dunstmerge cal_right-top gr_bg-settings
+    dunstmerge cal_ni_ns_right-top gr_bg-settings
     dunstify " " "$(cat /tmp/additionalweather)"
 }
 

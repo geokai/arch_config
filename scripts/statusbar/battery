@@ -23,9 +23,10 @@ capacity=$(cat /sys/class/power_supply/"$1"/capacity) || exit
 status=$(cat /sys/class/power_supply/"$1"/status)
 warn1=""
 # warn2=""
-# set minimum battery capacity levels:
-min_cap=10
-critical_cap=8
+
+# set `low' & `critical' battery capacity levels:
+low_cap=10
+critical_cap=5
 
 # allocate a color according to battery level:
 if [ "$capacity" -ge 75 ]; then
@@ -34,7 +35,7 @@ elif [ "$capacity" -ge 50 ]; then
 	color="$color15"
 elif [ "$capacity" -ge 25 ]; then
 	color="$color11"
-elif [ "$capacity" -ge "$min_cap" ]; then
+elif [ "$capacity" -ge "$low_cap" ]; then
 	color="$color9"
 	warn1="❗"
 else
@@ -44,22 +45,22 @@ else
 fi
 
 
-# check if the adapter is connected and charging the battery and send a critical
+# check if the adapter is connected and charging the battery and issue a critical
 # notification if not - notification will self cancel when battery is charging
-#if [ "$capacity" -lt "$critical_cap" ] && [ "$status" != "Charging" ]; then
-#    dunstify -C 001
-#    ( runner "$(flash_msg critical "<b>BATTERY CRITICAL Connect charger NOW</b>")" & )
-#elif [[ "$capacity" -lt "$min_cap" && "$capacity" -ge "$critical_cap" ]] && [ "$status" != 'Charging' ]; then
-#    pkill -15 -f "flash_msg critical"
-#    dunstify -r 001 -u critical "Power Warning!" "<b>Battery Low - connect adaptor</b>"
-#else
-#    pkill -15 -f "flash_msg critical"
-#    dunstify -C 001
-#fi
+if [ "$capacity" -lt "$critical_cap" ] && [ "$status" != "Charging" ]; then
+    dunstify -C 001
+    pgrep -f "flash_msg 002 critical" &>/dev/null || \
+        i3-msg -q exec 'flash_msg 002 critical "<b>BATTERY CRITICAL! Connect charger NOW</b>"'
+elif [[ "$capacity" -lt "$low_cap" && "$capacity" -ge "$critical_cap" ]] && [ "$status" != 'Charging' ]; then
+    pkill -15 -f "flash_msg 002 critical"
+    dunstify -r 001 -u critical "Power Warning!" "<b>Battery Low - connect adaptor</b>"
+else
+    pkill -15 -f "flash_msg 002 critical"
+    dunstify -C 001
+fi
 
 
-# assign color and warning as required:
-# [ -z $warn ] && warn=""
+# assign color for `charging' capacity indicator:
 [ "$status" = "Charging" ] && color="$color14"
 
 # _DISCH="🔋  >
@@ -71,6 +72,6 @@ fi
 
 printf "<span color='%s'>%s%s%s%s</span>\n" "$color" "$(echo "$status" | \
     sed -e "s/,//;s/Discharging/🔋 /;s/Not charging/🛑 /;s/Charging/🔌 /;s/Unknown/♻️ /;s/Full/⚡ /;s/ 0*/ /g;s/ ://g")" \
-    "$warn1" "$(echo "$capacity" | sed -e 's/$/%/')" #"$warn2"
+    "$warn1" "$(echo "$capacity" | sed -e 's/$/%/')"
 
 

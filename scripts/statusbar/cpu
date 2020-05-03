@@ -11,7 +11,7 @@ for x in "$(xrdb -query | grep color | grep -iv URxvt | sed "s/.*\./export /g;s/
 
 # Block 'click' functionality - 1:left, 2:scroll wheel click, 3:right
 case $BLOCK_BUTTON in
-    1) dunstmerge nf_right-top gr_bg-settings && notify-send "Cpu temp: $c_temp" "\n\n<b>Cpu Hogs:</b>\n$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
+    1) dunstmerge nf_right-top gr_bg-settings && notify-send "Cpu temp: $c_temp" "\n\n<b>Cpu Usage:</b>\n$(ps axch -o cmd:15,%cpu --sort=-%cpu | grep -v "Web Content" | head)" ;;
 	3) dunstmerge nf_right-top gr_bg-settings && notify-send "  CPU module:" "
 - Shows CPU temperature.
 - Click to show most cpu intensive processes.
