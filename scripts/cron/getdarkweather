@@ -1,0 +1,90 @@
+#!/bin/bash
+
+#################################################################################
+#### 
+#### Update weather forecast and current weather information from
+#### [Darksky](https://darksky.org)
+#### 
+#### This script retrieves weather data from the darksky api in json form.
+#### 
+#### The api key, location co-ordinates, and any additional parameters are
+#### aquired from the configuration file in an other location on the file
+#### system.
+#### 
+#### 
+#### Main function:
+#### The configuration file location variables are set,
+#### The internet connection is checked to be established. Exit 42 on failure.
+#### The config file is sourced by way of a self triggered trap which invokes
+#### the configuration function.
+#### The configuration function initially checks that the config file exists,
+#### and if so, sources the parameters contained within it.
+#### The parameters are used to construct the darksky api call, and using the
+#### curl function, the api call is made.
+#### The received json data is redirected to the weather file at,
+#### /tmp/darkweatherreport
+#### The trap is disabled.
+#### The main function returns.
+#### The script terminates with exit 0
+#### 
+#################################################################################
+
+#################################################################################
+#### 
+#### Author: George Kaimakis - https://github.com/geokai
+#### This file was created on 13 Apr 2020
+#### 
+#################################################################################
+
+
+#### Configuration:
+configuration() {
+
+    CFILE="${1}"
+    if [[ -f ${CFILE} ]]; then
+        # source config file
+        . ${CFILE}
+    else
+        pkill -RTMIN+5 i3blocks && dunstify " " "🛑 Configuration file not found!"
+        exit 2
+    fi
+
+    return 0
+}
+
+
+#### Main function:
+retrieve_weather() {
+
+    declare CONF_LOC="${HOME}/.config/_config_files"
+    declare CONF_FILE="${CONF_LOC}/_darksky.conf"
+
+# Check for established internet connection:
+    ping -q -w 1 -c 1 "$(ip r | grep default | tail -1 | cut -d ' ' -f 3)" \
+        > /dev/null || exit 42
+
+# Set trap and self-trigger to source configuration file:
+    trap "configuration ${CONF_FILE}" HUP
+    kill -HUP ${$}
+
+# Request weather data from api.darksky.net:
+    # echo "https://api.darksky.net/forecast/${API_KEY}/${LAT_LONG}?${UNITS}&${EXCLUDE}" \
+    #           > ${HOME}/bin/darksky_weather/weather.txt
+    curl -s "https://api.darksky.net/forecast/${API_KEY}/${LAT_LONG}?${UNITS}&${EXCLUDE}" \
+            > /tmp/darkweatherreport && \
+            pkill -RTMIN+5 i3blocks && dunstify " " "🌞 Weather forecast updated."
+
+# disable the HUP trap
+    trap "-" HUP
+
+    return 0
+}
+# Main function end:
+
+
+# Launch main function:
+retrieve_weather
+
+exit ${?}
+
+# vim: ft=sh
