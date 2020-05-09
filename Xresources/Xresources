@@ -20,9 +20,9 @@
 *.color14:					#00ffff
 *.color15:					#ffffff
 !! Transparency (0-255):
-st.alpha:					235
+st.alpha:					255
 !! Set a default font and font size as below:
-! *.font:					Monospace-14;
+!! *.font:					Monospace-12;
 
 !! urxvt extensions:
 ! URxvt.perl-ext-common:		default,matcher,resize-font,url-select,keyboard-select

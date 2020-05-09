@@ -354,7 +354,7 @@ autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo \| set bg=light
 autocmd BufWritePost ~/.config/bmdirs,~/.config/bmfiles !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
-autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+autocmd BufWritePost ~/.Xresources,~/.Xdefaults,~/.config/Xresources/Xresources !xrdb %
 
 " Navigating with guides
 nnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
