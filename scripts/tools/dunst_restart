@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+pidof dunst > /dev/null && killall dunst
+
+i3-msg "exec --no-startup-id dunst" > /dev/null
+
+# notify-send "dunst " "restarted!"
+
+if [ "$1" = "debug" ]; then
+    notify-send "message one"
+
+    msg="<span color='#FF0000' font='Hack 42'>🍋 YOLO</span> ha-lo"
+    notify-send " " "$msg"
+
+    notify-send " " "message two"
+    notify-send " " "message three"
+    notify-send " " "message four"
+    notify-send " " "message five"
+    notify-send " " "message six"
+fi
