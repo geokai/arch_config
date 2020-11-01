@@ -45,7 +45,7 @@ configuration() {
         # source config file
         . ${CFILE}
     else
-        pkill -RTMIN+5 i3blocks && dunstify " " "🛑 Configuration file not found!"
+        pkill -RTMIN+5 i3blocks # && dunstify " " "🛑 Configuration file not found!"
         exit 2
     fi
 
@@ -72,7 +72,7 @@ retrieve_weather() {
     #           > ${HOME}/bin/darksky_weather/weather.txt
     curl -s "https://api.darksky.net/forecast/${API_KEY}/${LAT_LONG}?${UNITS}&${EXCLUDE}" \
             > /tmp/darkweatherreport && \
-            pkill -RTMIN+5 i3blocks && dunstify " " "🌞 Weather forecast updated."
+            pkill -RTMIN+5 i3blocks # && dunstify " " "🌞 Darksky weather forecast updated."
 
 # disable the HUP trap
     trap "-" HUP

@@ -1,16 +1,17 @@
 # You can add comments to these files with #
-h	~/
-d	~/Documents
-D	~/Downloads
+h	 ~/
+d	 ~/Documents
+D	 ~/Downloads
 P   ~/Programs
-m	~/Music
-pp	~/Pictures
-pl	~/Pictures/Wallpapers/Landscapes
-pa	~/Pictures/Wallpapers/Art
-vv	~/Videos
-cf	~/.config
-sc	~/.config/scripts
+m	 ~/Music
+pp	 ~/Pictures
+pl	 ~/Pictures/Wallpapers/Landscapes
+pa	 ~/Pictures/Wallpapers/Art
+vv	 ~/Videos
+cf	 ~/.config
+sc	 ~/.config/scripts
 bn  ~/bin
 bl  ~/bin/local
-mn	/mnt
+bs  ~/bin/scripts
+mn	 /mnt
 

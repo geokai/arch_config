@@ -16,13 +16,23 @@ signal=11
 interval=900
 signal=5
 
+[news]
+label=📰
+interval=once
+signal=6
+
+[pacpackages]
+label=📦
+interval=once
+signal=8
+
 [memory]
-interval=30
+interval=10
 # label=MEM
 # label=🖥
 
 [cpu]
-interval=15
+interval=10
 # label=CPU
 # label=💻
 
@@ -52,16 +62,6 @@ interval=once
 #[empty]
 #command=~/.config/scripts/tools/runner batt_critical &
 #interval=5
-
-#[news]
-#label=📰
-#interval=once
-#signal=6
-
-#[pacpackages]
-#label=📦
-#interval=once
-#signal=8
 
 #[torrent]
 #interval=20

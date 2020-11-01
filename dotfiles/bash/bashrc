@@ -35,3 +35,4 @@ fi
 
 # shell completion of pipenv:
 eval "$(pipenv --completion)"
+

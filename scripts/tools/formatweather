@@ -58,6 +58,21 @@ _stringify(){
 }
 
 
+# determine state - whether value is rising, falling, or static:
+_state(){
+    if [ "$2" -lt "$1" ]; then
+        _next_state="Falling"
+        echo $_next_state
+    elif [ "$2" -gt "$1" ]; then
+        _next_state="Rising"
+        echo $_next_state
+    else
+        _next_state="Static"
+        echo $_next_state
+    fi
+}
+
+
 _weatherData=$1
 [[ -s $_weatherData ]] || { dunstify " " "Weather Information Not Available." && exit 1; }
 
@@ -66,62 +81,89 @@ _weatherData=$1
 ## access json file and retrieve data:
 
 # currently:
+echo "CURRENTLY"
 _time="$(jq '.currently.time | strflocaltime("%d-%m-%Y %H:%M:%S")' $_weatherData)" && \
     _str_time="$(_stringify "$_time")"
-    printf "%s:\t\t%s\n" "Time of Report" "$_str_time"
-_summary="$(jq '.currently.summary' $_weatherData)" && \
-    _str_summary="$(_stringify "$_summary")"
-    printf "%s:\t%s\n" "Current Summary" "$_str_summary"
-_temperature="$(jq '.currently.temperature' $_weatherData)" && \
-    printf "%s:\t\t%.1f C\n" "Current Temp" "$_temperature"
-_pressure="$(jq '.currently.pressure' $_weatherData)" && \
-    printf "%s:\t%s %s\n" "Current Pressure" "$_pressure" "mb/hPa"
-_humidity="$(jq '.currently.humidity' $_weatherData)" && \
-    _int_humidity="$(_percentage $_humidity)"
-    printf "%s:\t%s %s\n" "Current Humidity" "$_int_humidity" "%RH"
-_precipProbability="$(jq '.currently.precipProbability' $_weatherData)" && \
-    _int_precipProbability="$(_percentage $_precipProbability)"
-    printf "%s:\t%s %s\n" "Current Precip Prob" "$_int_precipProbability" "%"
-_windSpeed="$(jq '.currently.windSpeed' $_weatherData)" && \
-    printf "%s:\t%.1f %s\n" "Current Windspeed" "$_windSpeed" "km/h"
-_windGust="$(jq '.currently.windGust' $_weatherData)" && \
-    printf "%s:\t%.1f %s\n" "Current Wind Gust" "$_windGust" "km/h"
-_windBearing="$(jq '.currently.windBearing' $_weatherData)" && \
-    printf "%s:\t%s %s\n" "Current Wind Bearing" "$_windBearing" "Deg"
-_cloudCover="$(jq '.currently.cloudCover' $_weatherData)" && \
-    _int_cloudCover="$(_percentage $_cloudCover)"
-    printf "%s:\t%s %s\n" "Current Cloud Cover" "$_int_cloudCover" "%"
-_uvIndex="$(jq '.currently.uvIndex' $_weatherData)" && \
-    printf "%s:\t%s\n" "Current UV Index" "$_uvIndex"
+    printf "%s\t%s\n" "  Time of Report:" "$_str_time"
+_cu_summary="$(jq '.currently.summary' $_weatherData)" && \
+    _str_summary="$(_stringify "$_cu_summary")"
+    printf "%s:\t\t%s\n" "  Summary" "$_str_summary"
+_cu_temperature="$(jq '.currently.temperature' $_weatherData)" && \
+    printf "%s:\t\t\t%.1f C\n" "  Temp" "$_cu_temperature"
+_cu_pressure="$(jq '.currently.pressure' $_weatherData)" && \
+    printf "%s:\t\t%s %s\n" "  Pressure" "$_cu_pressure" "mb/hPa"
+_cu_humidity="$(jq '.currently.humidity' $_weatherData)" && \
+    _int_humidity="$(_percentage $_cu_humidity)"
+    printf "%s:\t\t%s %s\n" "  Humidity" "$_int_humidity" "%RH"
+# _cu_precipProbability="$(jq '.currently.precipProbability' $_weatherData)" && \
+#     _int_precipProbability="$(_percentage $_cu_precipProbability)"
+#     printf "%s:\t\t%s %s\n" "  Precip Prob" "$_int_precipProbability" "%"
+_cu_windSpeed="$(jq '.currently.windSpeed' $_weatherData)" && \
+    printf "%s:\t\t%.2f %s\n" "  Windspeed" "$_cu_windSpeed" "m/s"
+_cu_windGust="$(jq '.currently.windGust' $_weatherData)" && \
+    printf "%s:\t\t%.2f %s\n" "  Wind Gust" "$_cu_windGust" "m/s"
+_cu_windBearing="$(jq '.currently.windBearing' $_weatherData)" && \
+    printf "%s:\t\t%s %s\n" "  Wind Bearing" "$_cu_windBearing" "Deg"
+_cu_cloudCover="$(jq '.currently.cloudCover' $_weatherData)" && \
+    _int_cloudCover="$(_percentage $_cu_cloudCover)"
+    printf "%s:\t\t%s %s\n" "  Cloud Cover" "$_int_cloudCover" "%"
+# _cu_uvIndex="$(jq '.currently.uvIndex' $_weatherData)" && \
+#     printf "%s:\t\t%s\n" "  UV Index" "$_cu_uvIndex"
 echo
+
 
 # hourly:
-_time="$(jq '.hourly.data[0].time' $_weatherData)"
-_summary="$(jq '.hourly.data[0].summary' $_weatherData)" && \
-    _str_summary="$(_stringify "$_summary")"
-    printf "%s:\t\t%s\n" "Hourly Summary" "$_str_summary"
-_temperature="$(jq '.hourly.data[0].temperature' $_weatherData)"
-_precipProbability="$(jq '.hourly.data[0].precipProbability' $_weatherData)"
-_windSpeed="$(jq '.hourly.data[0].windSpeed' $_weatherData)"
-_windBearing="$(jq '.hourly.data[0].windBearing' $_weatherData)"
-_cloudCover="$(jq '.hourly.data[0].cloudCover' $_weatherData)"
+echo "HOURLY"
+_hr_time="$(jq -r '.hourly.data[0].time | strflocaltime("%H%M")' $_weatherData)" && \
+    printf "%s:\t\t%s %s\n" "  Forcast for" "$_hr_time" "hrs"
+_hr_summary="$(jq '.hourly.data[0].summary' $_weatherData)" && \
+    _str_summary="$(_stringify "$_hr_summary")"
+    printf "%s:\t\t%s\n" "  Summary" "$_str_summary"
+_hr_temperature_now="$(jq '.hourly.data[0].temperature' $_weatherData)" && \
+# _hr_temperature_next="$(jq '.hourly.data[1].temperature' $_weatherData)"
+    printf "%s:\t\t\t%.1f C\n" "  Temp" "$_hr_temperature_now"
+_hr_precipProbability="$(jq '.hourly.data[0].precipProbability' $_weatherData)" && \
+    _int_hr_precipProbability="$(_percentage $_hr_precipProbability)"
+    printf "%s:\t\t%s %s\n" "  Precip Prob" "$_int_hr_precipProbability" "%"
+_hr_humidity_now="$(jq '.hourly.data[0].humidity' $_weatherData)" && \
+    _int_hr_humidity_now="$(_percentage $_hr_humidity_now)"
+    printf "%s:\t\t%s %s\n" "  Humidity" "$_int_hr_humidity_now" "%RH  "
+# _hr_windSpeed="$(jq '.hourly.data[0].windSpeed' $_weatherData)"
+# _hr_windBearing="$(jq '.hourly.data[0].windBearing' $_weatherData)"
+_hr_cloudCover="$(jq '.hourly.data[0].cloudCover' $_weatherData)" && \
+    _int_hr_cloudCover="$(_percentage $_hr_cloudCover)"
+    printf "%s:\t\t%s %s\n" "  Cloud Cover" "$_int_hr_cloudCover" "%"
+_hr_uvIndex="$(jq '.hourly.data[0].uvIndex' $_weatherData)" && \
+    printf "%s:\t\t%s\n" "  UV Index" "$_hr_uvIndex"
 echo
 
+
 # daily:
-_time="$(jq '.daily.data[0].time' $_weatherData)"
-_summary="$(jq '.daily.data[0].summary' $_weatherData)" && \
-    _str_summary="$(_stringify "$_summary")"
-    printf "%s:\t\t%s\n" "Daily Summary" "$_str_summary"
-_sunriseTime="$(jq '.daily.data[0].sunriseTime' $_weatherData)"
-_sunsetTime="$(jq '.daily.data[0].sunsetTime' $_weatherData)"
-_moonPhase="$(jq '.daily.data[0].moonPhase' $_weatherData)"
-_precipProbability="$(jq '.daily.data[0].precipProbability' $_weatherData)"
-_precipType="$(jq '.daily.data[0].precipType' $_weatherData)"
-_temperatureHigh="$(jq '.daily.data[0].temperatureHigh' $_weatherData)"
-_temperatureLow="$(jq '.daily.data[0].temperatureLow' $_weatherData)"
-_cloudCover="$(jq '.daily.data[0].cloudCover' $_weatherData)"
-_uvIndex="$(jq '.daily.data[0].uvIndex' $_weatherData)"
+echo "DAILY"
+_d_time="$(jq -r '.daily.data[0].time | strflocaltime("%a %d %b %Y")' $_weatherData)" && \
+    printf "%s:\t\t%s\n" "  Forcast for" "$_d_time"
+_d_summary="$(jq '.daily.data[0].summary' $_weatherData)" && \
+    _str_summary="$(_stringify "$_d_summary")"
+    printf "%s:\t\t%s\n" "  Summary" "$_str_summary"
+# _d_sunriseTime="$(jq '.daily.data[0].sunriseTime' $_weatherData)"
+# _d_sunsetTime="$(jq '.daily.data[0].sunsetTime' $_weatherData)"
+# _d_moonPhase="$(jq '.daily.data[0].moonPhase' $_weatherData)"
+_d_temperatureHigh="$(jq '.daily.data[0].temperatureHigh' $_weatherData)"
+_d_temperatureHighTime="$(jq -r '.daily.data[0].temperatureHighTime | strflocaltime("%H:%M")' $_weatherData)" && \
+    printf "%s:\t\t%.1f C\t@ %s\n" "  Temp High" "$_d_temperatureHigh" "$_d_temperatureHighTime"
+# _d_temperatureLow="$(jq '.daily.data[0].temperatureLow' $_weatherData)"
+_d_precipProbability="$(jq '.daily.data[0].precipProbability' $_weatherData)"
+    _int_d_precipProbability="$(_percentage $_d_precipProbability)"
+_d_precipIntensitiyMaxTime="$(jq -r '.daily.data[0].precipIntensityMaxTime | strflocaltime("%H:%M")' $_weatherData)" && \
+    printf "%s:\t\t%s %s\t@ %s\n" "  Precip Prob" "$_int_d_precipProbability" "%" "$_d_precipIntensitiyMaxTime"
+_d_precipType="$(jq -r '.daily.data[0].precipType' $_weatherData)" && \
+    printf "%s:\t\t%s\n" "  Precip Type" "$_d_precipType"
+# _d_cloudCover="$(jq '.daily.data[0].cloudCover' $_weatherData)"
+_d_uvIndex="$(jq '.daily.data[0].uvIndex' $_weatherData)"
+_d_uvIndexTime="$(jq -r '.daily.data[0].uvIndexTime | strflocaltime("%H:%M")' $_weatherData)" && \
+    printf "%s:\t\t%s\t@ %s\n" "  Max uvIndex" "$_d_uvIndex" "$_d_uvIndexTime"
 echo
+
 
 # additional info:
 #   location
@@ -131,7 +173,7 @@ echo
 #   _mB/hPa
 #   _%RH
 #   _%
-#   _km/h
+#   _m/s
 #   _degs
 #   _%
 

@@ -25,5 +25,6 @@ case $BLOCK_BUTTON in
 🔽: downloading
 ✅: done
 🌱: done and seeding" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

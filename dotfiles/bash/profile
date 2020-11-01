@@ -1,9 +1,15 @@
 #!/bin/sh
 # Profile file. Runs on login.
 
-source ${HOME}/.bashrc
+# if running bash:
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+        source ${HOME}/.bashrc
+    fi
+fi
 
-# ruby to path:
+# add ruby to path:
 PATH=$PATH:$(ruby -e 'puts Gem.user_dir')/bin
 export PATH
 
@@ -13,13 +19,7 @@ export PATH="$PATH:$(du "$HOME/.config/scripts/" | cut -f2 | tr '\n' ':' | sed '
 # Adds vim-iced to path - clojure functionality in vim/nvim
 export PATH="$PATH:$HOME/.config/nvim/plugged/vim-iced/bin"
 
-# Adds ~/.local/.local/bin to path
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$PATH:$HOME/.local/bin/"
-fi
-
-
-# Add `~/bin` & `~/bin/local` to the `$PATH`
+# Add `~/bin' & `~/bin/local' to the `$PATH'
 if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin/"
 fi

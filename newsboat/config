@@ -1,5 +1,8 @@
 #show-read-feeds no
-auto-reload yes
+auto-reload no
+#max-items 100
+download-path "/home/geoptus/Videos/rss_feeds"
+save-path "/home/geoptus/Videos/rss_feeds"
 
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 
@@ -23,12 +26,12 @@ bind-key U show-urls
 bind-key x pb-delete
 bind-key ^t next-unread
 
-color listnormal cyan default
-color listfocus black yellow standout bold
-color listnormal_unread blue default
-color listfocus_unread yellow default bold
+color listnormal color15 default
+color listfocus color226 default bold   # currently selected: bright yellow
+color listnormal_unread color76 default bold    # brightish green
+color listfocus_unread color208 default bold
 color info red black bold
-color article cyan default
+color article color254 default
 
 browser linkhandler
 macro , open-in-browser

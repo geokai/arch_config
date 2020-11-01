@@ -7,7 +7,7 @@ dunstmerge cal_right-top
 # Sets the background. If given an argument, will set file as background.
 [ ! -z "$1" ] && cp "$1" ~/.config/wall.png && dunstify --icon=${HOME}/.config/wall.png " " "Wallpaper changed."
 
- # --icon="${HOME}/.config/wall.png"
+# --icon="${HOME}/.config/wall.png"
 
 # also create a lo-rez blured copy to be used as a lock-screen image
 convert ~/.config/wall.png -resize 5% -resize 1920x1080\! -paint 3 ~/.config/lock.png &

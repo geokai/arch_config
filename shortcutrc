@@ -12,6 +12,7 @@ cf="cd ~/.config && ls -A" \
 sc="cd ~/.config/scripts && ls -A" \
 bn="cd ~/bin && ls -A" \
 bl="cd ~/bin/local && ls -A" \
+bs="cd ~/bin/scripts && ls -A" \
 mn="cd /mnt && ls -A" \
 bf="$EDITOR ~/.config/bmfiles" \
 bd="$EDITOR ~/.config/bmdirs" \

@@ -16,6 +16,7 @@ case $BLOCK_BUTTON in
 - Shows CPU temperature.
 - Click to show most cpu intensive processes.
 - % is of a single core." ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 

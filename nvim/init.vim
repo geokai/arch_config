@@ -51,6 +51,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/rainbow_parentheses.vim'  " Colorful nested parens - sweet!
 Plug 'guns/vim-sexp',       {'for': 'clojure'}
 Plug 'liquidz/vim-iced',    {'for': 'clojure'}
+Plug 'vim-pandoc/vim-pandoc'    " fuzzy-find for bib files
+Plug 'vim-pandoc/vim-pandoc-syntax'  " syntax support for bib files searches
 call plug#end()
 
 " Enable vim-iced's default key mapping
@@ -478,11 +480,11 @@ augroup END
 	autocmd FileType html inoremap ù &ugrave;
 
 """MARKDOWN:---------------------------------------------------------------{{{1
-	autocmd Filetype markdown,rmd,md nnoremap <leader>w yiWi[<esc>Ea](<esc>pa)
+	autocmd Filetype markdown,rmd,md inoremap ,w <esc>yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype markdown,rmd,md inoremap ,n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd,md inoremap ,b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd,md inoremap ,s ~~~~<++><Esc>F~hi
-	autocmd Filetype markdown,rmd,md inoremap ,e **<++><Esc>F*i
+	autocmd Filetype markdown,rmd,md inoremap ,e __<++><Esc>F_i
 	autocmd Filetype markdown,rmd,md inoremap ,h ====<Space><++><Esc>F=hi
 	autocmd Filetype markdown,rmd,md inoremap ,i ![](<++>)<++><Esc>F[a
 	autocmd Filetype markdown,rmd,md inoremap ,a [](<++>)<++><Esc>F[a

@@ -8,7 +8,8 @@ case $BLOCK_BUTTON in
 	3) dunstmerge nf_right-top gr_bg-settings && dunstify "  📢 Volume module:" "
 - Shows volume 🔊, 🔇 if muted.
 - Middle click to mute.
-- Scroll to change."
+- Scroll to change." ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 [ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && exit

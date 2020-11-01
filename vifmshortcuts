@@ -51,6 +51,10 @@ map gbl :cd ~/bin/local<CR>
 map tbl <tab>:cd ~/bin/local<CR><tab>
 map Mbl <tab>:cd ~/bin/local<CR><tab>:mo<CR>
 map Ybl <tab>:cd ~/bin/local<CR><tab>:co<CR>
+map gbs :cd ~/bin/scripts<CR>
+map tbs <tab>:cd ~/bin/scripts<CR><tab>
+map Mbs <tab>:cd ~/bin/scripts<CR><tab>:mo<CR>
+map Ybs <tab>:cd ~/bin/scripts<CR><tab>:co<CR>
 map gmn :cd /mnt<CR>
 map tmn <tab>:cd /mnt<CR><tab>
 map Mmn <tab>:cd /mnt<CR><tab>:mo<CR>

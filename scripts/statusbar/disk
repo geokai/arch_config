@@ -29,6 +29,7 @@ $(df -h --output=target,used,size)" ;;
 	3) dunstmerge nf_right-top gr_bg-settings && notify-send "  Hard drive module:" "
 - Shows used hard drive space.
 - Click to show all disk info." ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 

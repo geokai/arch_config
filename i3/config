@@ -36,6 +36,7 @@ exec_always --no-startup-id notify-send -i ~/.config/scripts/larbs.png 'Welcome 
 # #---Basic Definitions---# #
 gaps inner 10
 gaps outer 10
+for_window [class="^.*"] floating enable
 set $term --no-startup-id $TERMINAL -f mono:pixelsize=12
 set $file $FILE
 set $mod Mod4
@@ -61,6 +62,13 @@ for_window [instance="st"] border normal
 for_window [instance="st"] resize set 800 600
 for_window [instance="st"] move position center
 
+# web browser:
+# TODO work out how to use the env var $BROWSER
+for_window [class="firefox"] floating enable
+for_window [class="firefox"] border pixel 2
+for_window [class="firefox"] resize set 900 700
+for_window [class="firefox"] move position center
+
 # spotify:
 for_window [title="Spotify Premium"] border pixel 2
 
@@ -81,6 +89,10 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
+# other programs:
+# for_window [class="Lxappearance"] focus; exec --no-startup-id exec i3fyra -m D
+
+
 # #---Starting External Scripts---# #
 # mpd startup
 exec --no-startup-id mpd
@@ -89,8 +101,8 @@ exec --no-startup-id setbg
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
-exec --no-startup-id xcompmgr
-# exec --no-startup-id picom
+# exec --no-startup-id xcompmgr
+exec --no-startup-id picom
 # Runs the key remapping scripts
 exec --no-startup-id remaps
 # Unclutter makes the mouse invisible after a brief period
@@ -183,6 +195,7 @@ bindsym $mod+b			        bar mode toggle
 bindsym $mod+Shift+f			fullscreen toggle
 bindsym $mod+f			        split toggle
 bindsym $mod+Shift+space 	    floating toggle
+# bindsym $mod+Shift+space 	    exec --no-startup-id i3fyra -a
 bindsym $mod+space		        focus mode_toggle
 bindsym $mod+Escape		        workspace prev
 bindsym $mod+v                  layout toggle split
@@ -199,6 +212,24 @@ bindsym $mod+Shift+j		    move down 30
 bindsym $mod+Shift+k		    move up 30
 bindsym $mod+Shift+l		    move right 30
 
+# i3fyra Focus/Moving (uses the arrow keys - poss incompatability with i3-gaps)
+# focus - for i3fyra only:
+bindsym $mod+Left	            exec --no-startup-id i3viswiz --parent --focus A
+bindsym $mod+Down	            exec --no-startup-id i3viswiz --parent --focus B
+bindsym $mod+Up	                exec --no-startup-id i3viswiz --parent --focus C
+bindsym $mod+Right	            exec --no-startup-id i3viswiz --parent --focus D
+# move - for i3fyra only:
+bindsym $mod+Shift+Left	        exec --no-startup-id i3fyra -m l
+bindsym $mod+Shift+Down	        exec --no-startup-id i3fyra -m d
+bindsym $mod+Shift+Up	        exec --no-startup-id i3fyra -m u
+bindsym $mod+Shift+Right	    exec --no-startup-id i3fyra -m r
+
+# Focus/Move tab within parent container - mainly i3fyra:
+bindsym $mod+Tab                exec --no-startup-id i3flip next
+bindsym $mod+Shift+Tab          exec --no-startup-id i3flip prev
+bindsym $mod+backslash          exec --no-startup-id i3flip -m next
+bindsym $mod+Shift+backslash    exec --no-startup-id i3flip -m prev
+
 # Resizing Windows:
 bindsym $mod+Shift+y		    exec --no-startup-id i3resize left
 bindsym $mod+Shift+u		    exec --no-startup-id i3resize down
@@ -206,7 +237,9 @@ bindsym $mod+Shift+i		    exec --no-startup-id i3resize up
 bindsym $mod+Shift+o		    exec --no-startup-id i3resize right
 
 # --Program Bindings:
-bindsym $mod+Return 		    exec $term
+bindsym $mod+Return 		    exec --no-startup-id $term
+# bindsym $mod+Mod1+Return 		exec --no-startup-id exec cool-retro-term --profile "Monochrome Green"
+bindsym $mod+Mod1+Return 		exec --no-startup-id exec cool-retro-term --profile "Default Amber"
 bindsym $mod+Shift+Return	    exec --no-startup-id samedir "-f mono:pixelsize=12"
 bindsym $mod+grave		        exec --no-startup-id dmenuunicode
 bindsym $mod+a			        exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
@@ -216,7 +249,7 @@ bindsym $mod+d			        exec --no-startup-id rofi -show run -theme striPaper an
 bindsym $mod+e			        exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		    exec --no-startup-id tutorialvids
 bindsym $mod+Shift+g            exec --no-startup-id time_5
-bindsym $mod+i 			        exec $term -e htop
+bindsym $mod+i 			        exec $term -e sudo htop
 bindsym $mod+m 			        exec --no-startup-id $term -e ncmpcpp
 bindsym $mod+n			        exec $term -e newsboat && pkill -RTMIN+6 i3blocks
 bindsym $mod+Shift+q		    exec --no-startup-id manview
@@ -245,8 +278,6 @@ bindsym $mod+Home		        workspace $ws1
 bindsym $mod+Shift+Home		    move container to workspace $ws1
 bindsym $mod+End		        workspace $ws10
 bindsym $mod+Shift+End		    move container to workspace $ws10
-bindsym $mod+Tab		        workspace back_and_forth
-bindsym $mod+backslash		    workspace back_and_forth
 
 # bindsym $mod+Prior		        workspace prev
 # bindsym $mod+Shift+Prior	    move container to workspace prev
@@ -323,15 +354,6 @@ bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id ducksearch
 bindsym $mod+F12	exec $term -e nmtui
 
-# #---Arrow Keys---# #
-bindsym $mod+Left		    focus left
-bindsym $mod+Down		    focus down
-bindsym $mod+Up			    focus up
-bindsym $mod+Right 		    focus right
-bindsym $mod+Shift+Left		move left
-bindsym $mod+Shift+Down		move down
-bindsym $mod+Shift+Up		move up
-bindsym $mod+Shift+Right 	move right
 
 # #---Media Keys---# #
 

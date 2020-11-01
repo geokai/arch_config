@@ -29,7 +29,7 @@ weather_now
 
 # status bar 'weather block' left-click - 1)
 display_additional() {
-    dunstmerge cal_ni_ns_right-top gr_bg-settings
+    dunstmerge cal_right-top gr_bg-settings
     dunstify " " "$(cat /tmp/additionalweather)"
 }
 
@@ -44,22 +44,18 @@ Click for wttr.in forecast.
 🌧 Chance of precipitation %
 ⬆ Daily high
 ⬇ Daily low";;
-    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# print the weather block
-# precipitation percentage:
-printf "%s" "$(sed '16q;d' /tmp/weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/🌧 /g  " | tr -d '\n')"
-# daily high & low temperature:
-printf "%s\n" "$(sed '13q;d' /tmp/weatherreport | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ⬇",$1 "°","⬆",$2 "°"}')"
+printf "%s" "$(sed '16q;d' /tmp/weatherreport | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/🌧 /g" | tr -d '\n')"
+
+sed '13q;d' /tmp/weatherreport | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print "  ⬇",$1 "°","⬆",$2 "°"}'
 
 
 # ❄: Daily low
 # 🌞: Daily high 
 # ☔: Chance of rain/snow %
-# ☂ Chance of rain/snow %
+# 🌧
 # ⬆ U+2B06
-# ⬇
 
 # ⇧  - southerly ⬆️
 # ⬀  - southwesterly ↗️

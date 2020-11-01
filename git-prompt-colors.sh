@@ -30,8 +30,8 @@ override_git_prompt_colors() {
   ## GIT_PROMPT_COMMAND_OK="${Green}✔-_LAST_COMMAND_STATE_ "    # indicator if the last command returned with an exit code of 0
   ## GIT_PROMPT_COMMAND_FAIL="${Red}✘-_LAST_COMMAND_STATE_ "    # indicator if the last command returned with an exit code of other than 0
 
-  # GIT_PROMPT_COMMAND_OK="${Green}✔"    # indicator if the last command returned with an exit code of 0
-  # GIT_PROMPT_COMMAND_FAIL="${Red}✘-_LAST_COMMAND_STATE_"    # indicator if the last command returned with an exit code of other than 0
+  GIT_PROMPT_COMMAND_OK="${BoldGreen}[_LAST_COMMAND_STATE_]"    # indicator if the last command returned with an exit code of 0
+  GIT_PROMPT_COMMAND_FAIL="${BoldRed}[_LAST_COMMAND_STATE_]"    # indicator if the last command returned with an exit code of other than 0
 
   ## template for displaying the current virtual environment
   ## use the placeholder _VIRTUALENV_ will be replaced with 
@@ -64,3 +64,6 @@ override_git_prompt_colors() {
 }
 
 reload_git_prompt_colors "Custom"
+
+# ✔
+# ✘

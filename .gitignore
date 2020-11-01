@@ -1,6 +1,7 @@
 ### gitignore - .config directory repo ###
 
 # misc:
+systemd
 live-latex-preview
 lyrics
 google-chrome/
@@ -9,7 +10,9 @@ Atom/
 GIMP/
 enchant/
 gedit/
-dunst/
+# dunst/
+htop
+configstore
 
 #wallpaper, lockscreen and other images:
 wall.png

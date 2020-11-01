@@ -15,6 +15,7 @@ case $BLOCK_BUTTON in
 ♻: stagnant charge
 ❗: battery less than 25%!
 ‼ :battery less than 5%!\n" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 
@@ -25,8 +26,8 @@ warn1=""
 # warn2=""
 
 # set `low' & `critical' battery capacity levels:
-low_cap=10
-critical_cap=5
+low_cap=11
+critical_cap=8
 
 # allocate a color according to battery level:
 if [ "$capacity" -ge 75 ]; then

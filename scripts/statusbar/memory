@@ -18,6 +18,7 @@ case $BLOCK_BUTTON in
 	3) dunstmerge nf_right-top gr_bg-settings && notify-send " " "<b>Memory module:</b>
 - Shows Memory Used/Total.
 - Click to show memory Usage." ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 

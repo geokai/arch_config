@@ -1,20 +1,24 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) $TERMINAL -e nmtui ;;
-	3) pgrep -x dunst >/dev/null && notify-send "  Internet module:" "
-- Click for \`nmtui\` for wifi access\n
-📶: wifi connection with quality
-📡: wifi connection established
-🛑  wifi connection lost
-🌐: ethernet connection established
-❎: ethernet connection lost
-" ;;
+    1) pgrep -x dunst >/dev/null && dunstify " " "$(nmap_filter_clients /tmp/nmap-list.txt)" ;;
+	3) $TERMINAL -e nmtui ;;
+# 	3) pgrep -x dunst >/dev/null && notify-send "  Internet module:" "
+# - Click for \`nmtui\` for wifi access\n
+# 📶: wifi connection with quality
+# 📡: wifi connection established
+# 🛑  wifi connection lost
+# 🌐: ethernet connection established
+# ❎: ethernet connection lost
+# " ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 #[ "$(cat /sys/class/net/w*/operstate)" == 'up' ] && wifiicon="📡 "
 #[ "$(cat /sys/class/net/w*/operstate)" == 'down' ] && wifiicon="🛑 "
+num_clients="$(nmap_filter_clients /tmp/nmap-list.txt | wc -l)"
 
 [ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "📶", int($3 * 100 / 70) "%" }')
 
-printf "%s\n" "$wifiicon " # "$(cat /sys/class/net/w*/operstate | sed "s/down/🛑 / ;s/up/📡 /")"
+printf "%s %s\n" "$wifiicon " "$num_clients"
+# "$(cat /sys/class/net/w*/operstate | sed "s/down/🛑 / ;s/up/📡 /")"

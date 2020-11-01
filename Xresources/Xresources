@@ -58,17 +58,17 @@ st.alpha:					255
 ! URxvt.color7:				#d6d6d6
 ! URxvt.color8:				#41535B
 ! URxvt.color9:				#Cd3f45
-! URxvt.color10:				#9fca56
-! URxvt.color11:				#e6cd69
-! URxvt.color12:				#55b5db
-! URxvt.color13:				#a074c4
-! URxvt.color14:				#55dbbe
-! URxvt.color15:				#ffffff
+! URxvt.color10:			#9fca56
+! URxvt.color11:			#e6cd69
+! URxvt.color12:			#55b5db
+! URxvt.color13:			#a074c4
+! URxvt.color14:			#55dbbe
+! URxvt.color15:			#ffffff
 
 !! 256 color space:
-!! URxvt.color16:				#db7b55
-!! URxvt.color17:				#8a553f
-!! URxvt.color18:				#8ec43d
-!! URxvt.color19:				#3B758C
-!! URxvt.color20:				#43a5d5
-!! URxvt.color21:				#eeeeee
+!! URxvt.color16:			#db7b55
+!! URxvt.color17:			#8a553f
+!! URxvt.color18:			#8ec43d
+!! URxvt.color19:			#3B758C
+!! URxvt.color20:			#43a5d5
+!! URxvt.color21:			#eeeeee

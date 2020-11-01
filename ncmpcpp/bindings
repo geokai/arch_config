@@ -189,10 +189,10 @@
 #
 #def_key "end"
 #  move_end
-#
+
 def_key "insert"
   select_item
-#
+
 #def_key "enter"
 #  enter_directory
 #
@@ -607,6 +607,7 @@ def_key "G"
   move_end
 def_key "g"
   move_home
+
 #jump_to_position_in_song
 def_key "U"
   update_database

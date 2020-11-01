@@ -4,7 +4,8 @@
 
 ping -q -t 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
 
-/usr/bin/notify-send -i "$PIX/rss.svg" "Updating RSS feeds..."
+dunstmerge cal_ni_ns_right-top gr_bg-settings
+/usr/bin/notify-send -i "$PIX/rss.svg" " " "Updating RSS feeds..."
 
 pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R && exit
 

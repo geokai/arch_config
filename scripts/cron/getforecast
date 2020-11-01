@@ -9,4 +9,4 @@ location="$1"
 [ -z "$location" ] && location=""
 
 curl -s "wttr.in/${location}" > /tmp/weatherreport && \
-        pkill -RTMIN+5 i3blocks && notify-send " " "🌞 Weather forecast updated."
+        pkill -RTMIN+5 i3blocks # && notify-send " " "🌞 Weather forecast updated."
