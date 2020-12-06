@@ -49,6 +49,7 @@ Plug 'christoomey/vim-sort-motion'  " Sorting: linewise, character, block etc
 Plug 'ying17zi/vim-live-latex-preview'  " LaTeX coolness
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/rainbow_parentheses.vim'  " Colorful nested parens - sweet!
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'guns/vim-sexp',       {'for': 'clojure'}
 Plug 'liquidz/vim-iced',    {'for': 'clojure'}
 Plug 'vim-pandoc/vim-pandoc'    " fuzzy-find for bib files
@@ -65,6 +66,7 @@ let maplocalleader = "\\"
 set nocompatible
 filetype plugin on
 syntax on
+set hidden
 set encoding=utf-8
 " set mouse=a
 set clipboard=unnamedplus
