@@ -13,7 +13,7 @@ fi
 PATH=$PATH:$(ruby -e 'puts Gem.user_dir')/bin
 export PATH
 
-# Adds `~/.scripts` and all subdirectories to $PATH
+# Adds `~/.config/scripts` and all subdirectories to $PATH
 export PATH="$PATH:$(du "$HOME/.config/scripts/" | cut -f2 | tr '\n' ':' | sed 's/:*$//' | sed 's|/*$||')"
 
 # Adds vim-iced to path - clojure functionality in vim/nvim
@@ -32,10 +32,17 @@ if [ -d "$HOME/bin/scripts" ]; then
     PATH="$PATH:$HOME/bin/scripts"
 fi
 
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$PATH:$HOME/.local/bin"
+fi
+
 # git completion:
 if [ -f ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
 fi
+
+# github-cli completion script:
+eval "$(gh completion -s bash)"
 
 # programme variables
 export EDITOR="nvim"
@@ -49,7 +56,7 @@ export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
 export PIX="$HOME/.pix/"
 
 # less/man colors
-export LESS=-R
+export LESS='-R'
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"      # begin blink
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"      # begin bold
 export LESS_TERMCAP_me="$(printf '%b' '[0m')"; a="${a%_}"         # begin bold/blink

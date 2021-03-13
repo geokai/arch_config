@@ -16,7 +16,7 @@ esac
 
 #[ "$(cat /sys/class/net/w*/operstate)" == 'up' ] && wifiicon="📡 "
 #[ "$(cat /sys/class/net/w*/operstate)" == 'down' ] && wifiicon="🛑 "
-num_clients="$(nmap_filter_clients /tmp/nmap-list.txt | wc -l)"
+num_clients="$(cat /tmp/nmap-list.txt | awk '/report/' | wc -l)"
 
 [ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "📶", int($3 * 100 / 70) "%" }')
 

@@ -22,7 +22,7 @@ alias ka="killall" \
 	ld="ls -dl" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
+    ccat="highlight -O truecolor" \
 	yt="youtube-dl --add-metadata -i -o '%(upload_date)s-%(title)s.%(ext)s'" \
 	yta="yt -x -f bestaudio/best" \
 	YT="youtube-viewer" \

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) i3-msg -q "exec --no-startup-id $TERMINAL -f mono:pixelsize=10 pulsemixer --color 1" ;;
+	1) i3-msg -q "exec --no-startup-id $TERMINAL -f mono:pixelsize=12 pulsemixer --color 1" ;;
 	2) pulsemixer --toggle-mute ;;
 	4) pulsemixer --change-volume -5 ;;
 	5) pulsemixer --change-volume +5 ;;

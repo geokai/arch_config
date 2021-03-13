@@ -34,7 +34,7 @@ if [[ ! -d $VENV_DIR ]]; then
 fi
 
 # shell completion of pipenv:
-eval "$(pipenv --completion)"
+# eval "$(pipenv --completion)"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

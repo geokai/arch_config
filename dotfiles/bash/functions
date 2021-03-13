@@ -2,7 +2,7 @@
 
 # helper functions:
 # hmmm must research the functionality of this function:
-shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+shdl() { curl -O $(curl -s http://sci-hub.st/"$@" | grep location.href | grep -o http.*pdf) ;}
 # find and open a file in your fav editor:
 se() { du -a ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
 # not sure what this does!

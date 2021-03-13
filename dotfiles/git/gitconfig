@@ -14,6 +14,8 @@
 	shorty = status --short --branch
 [push]
 	default = matching
+[init]
+	defaultBranch = master
 
 
 # vim: ft=cfg

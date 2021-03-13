@@ -26,6 +26,7 @@ disk_status="$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"
 case $BLOCK_BUTTON in
 	1) dunstmerge nf_right-top gr_bg-settings && notify-send "Disk space" "
 $(df -h --output=target,used,size)" ;;
+#$(df -h --output=target,used,size | grep -v "/var/lib/*")" ;;
 	3) dunstmerge nf_right-top gr_bg-settings && notify-send "  Hard drive module:" "
 - Shows used hard drive space.
 - Click to show all disk info." ;;
