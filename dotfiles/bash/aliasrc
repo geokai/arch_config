@@ -14,8 +14,9 @@ alias ka="killall" \
     nv="nvim" \
 	x="sxiv -ft *" \
 	sdn="sudo shutdown -h now" \
+    rbt="sudo reboot" \
 	gua="git remote | xargs -L1 git push --all" \
-	ls="ls -NF --color=auto --group-directories-first" \
+	ls="ls -NF --color=auto --group-directories-first --time-style=+'%F %T'" \
 	la="ls -A" \
 	ll="ls -lA" \
 	lf="ls -l" \
@@ -34,6 +35,10 @@ alias ka="killall" \
     ta="tmux attach -t" \
     tl="tmux ls" \
     tk="tmux kill-session -t" \
-    rm="rm -iv"
+    rm="rm -iv" \
+    pd="pushd" \
+    po="popd" \
+    ds="dirs | tr ' ' '\n'" \
+    psc="ps xawf -eo pid,user,cgroup,args"
 
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.

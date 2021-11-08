@@ -78,7 +78,7 @@ set number
 
 set list
 set showbreak=↳\
-set listchars=tab:›\ ,trail:–,extends:»,precedes:«,eol:¬
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,eol:¬
 set title
 set scrolloff=5
 set noshowmode
@@ -104,6 +104,8 @@ if has("autocmd")
     autocmd FileType css setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType clojure setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType cfg setlocal ts=2 sts=2 sw=2 expandtab
 endif
 
 set wrap
@@ -122,8 +124,8 @@ set colorcolumn=+1
 set background=dark
 set cursorline
 highlight cursorline ctermbg=234 ctermfg=none cterm=none
-highlight ColorColumn ctermbg=232
-call matchadd('ColorColumn', '\%81v', 100)
+highlight ColorColumn ctermbg=236
+"call matchadd('ColorColumn', '\%81v', 100)
 highlight! link TermCursor Cursor
 highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
 highlight nontext ctermfg=darkgrey ctermbg=none
@@ -151,10 +153,14 @@ nnoremap <silent> <F5> <ESC>a# This file was created on <ESC>:r!date "+\%d \%b \
 " inoremap <silent> <leader>u <esc>:set relativenumber!<CR>a
 " nnoremap <silent> <leader>u :set relativenumber!<CR><esc>
 
+" Erik Falor's mappings, Funky!
 " run any command written on a line as if in the shell (cursor on line)
 " and replace the line (command) with the result:
 " e.g. date --date='@0' --> Thu Jan  1 01:00:00 BST 1970
 nnoremap Q !!sh<CR>
+
+" paste the line under the cursor in to the command (mode) line and run it
+" cnoremap     <Esc>v <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')<CR>
 
 " Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
 vnoremap <C-c> "+y
@@ -192,6 +198,7 @@ inoremap <leader>( ()<ESC>i
 inoremap <leader>[ []<ESC>i
 inoremap <leader>t[ [  ]<ESC>hi
 inoremap <leader>{ {}<ESC>i
+inoremap <leader>\| \|\|<ESC>i
 inoremap <leader>< <><ESC>i
 
 " set up function block:
@@ -361,9 +368,9 @@ autocmd BufWritePost ~/.config/bmdirs,~/.config/bmfiles !shortcuts
 autocmd BufWritePost ~/.Xresources,~/.Xdefaults,~/.config/Xresources/Xresources !xrdb %
 
 " Navigating with guides
-nnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
-inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
-vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+nnoremap <silent><leader><leader> <Esc>/<++><Enter>:nohl<Enter>"_c4l
+inoremap <silent><leader><leader> <Esc>/<++><Enter>:nohl<Enter>"_c4l
+vnoremap <silent><leader><leader> <Esc>/<++><Enter>:nohl<Enter>"_c4l
 
 " Clojure configuration
 " activate rainbow-parens on file type
@@ -493,6 +500,7 @@ augroup END
 	autocmd Filetype markdown,rmd,md inoremap ,1 #<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd,md inoremap ,2 ##<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd,md inoremap ,3 ###<Space><Enter><++><Esc>kA
+	autocmd Filetype markdown,rmd,md inoremap ,4 ####<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd,md inoremap ,l --------<Enter>
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO

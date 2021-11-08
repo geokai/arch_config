@@ -11,7 +11,8 @@ GIMP/
 enchant/
 gedit/
 # dunst/
-htop
+htop/
+htoprc
 configstore
 Google
 abiword

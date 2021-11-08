@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# create an empty darkweatherrerport file on reboot,
+# which will be populated by the results of the getdarkweather script
+
+cd /tmp
+
+# [[ ! -f darkweatherreport ]] && touch darkweatherreport
+[[ ! -f darkweatherreport ]] && echo "No weather information at this time." > darkweatherreport
+
+cd ~

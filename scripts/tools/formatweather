@@ -21,6 +21,11 @@
 #################################################################################
 
 
+# hide/restore the cursor:
+# trap 'tput cnorm; ' SIGTERM    # restore cursor on interupt
+# tput civis                  # hide cursor
+
+
 ## darksky decimal percentages, 0 - 1 % ##
 # example percentages, 1    == 100%
 #                      0.1  ==  10%
@@ -82,9 +87,10 @@ _weatherData=$1
 
 # currently:
 echo "CURRENTLY"
-_time="$(jq '.currently.time | strflocaltime("%d-%m-%Y %H:%M:%S")' $_weatherData)" && \
-    _str_time="$(_stringify "$_time")"
-    printf "%s\t%s\n" "  Time of Report:" "$_str_time"
+# _time="$(jq '.currently.time | strflocaltime("%F %T")' $_weatherData)" && \
+_time="$(date --date=@"$(jq '.currently.time' $_weatherData)" '+%F %T %Z')" && \
+    # _str_time="$(_stringify "$_time")"
+    printf "%s\t%s\n" "  Time of Report:" "$_time"
 _cu_summary="$(jq '.currently.summary' $_weatherData)" && \
     _str_summary="$(_stringify "$_cu_summary")"
     printf "%s:\t\t%s\n" "  Summary" "$_str_summary"
@@ -140,7 +146,7 @@ echo
 
 # daily:
 echo "DAILY"
-_d_time="$(jq -r '.daily.data[0].time | strflocaltime("%a %d %b %Y")' $_weatherData)" && \
+_d_time="$(date --date=@"$(jq -r '.daily.data[0].time' $_weatherData)" '+%a %d %b %Y')" && \
     printf "%s:\t\t%s\n" "  Forcast for" "$_d_time"
 _d_summary="$(jq '.daily.data[0].summary' $_weatherData)" && \
     _str_summary="$(_stringify "$_d_summary")"
@@ -154,7 +160,7 @@ _d_temperatureHighTime="$(jq -r '.daily.data[0].temperatureHighTime | strflocalt
 # _d_temperatureLow="$(jq '.daily.data[0].temperatureLow' $_weatherData)"
 _d_precipProbability="$(jq '.daily.data[0].precipProbability' $_weatherData)"
     _int_d_precipProbability="$(_percentage $_d_precipProbability)"
-_d_precipIntensitiyMaxTime="$(jq -r '.daily.data[0].precipIntensityMaxTime | strflocaltime("%H:%M")' $_weatherData)" && \
+_d_precipIntensitiyMaxTime="$(date --date=@"$(jq -r '.daily.data[0].precipIntensityMaxTime' $_weatherData)" '+%H:%M')" && \
     printf "%s:\t\t%s %s\t@ %s\n" "  Precip Prob" "$_int_d_precipProbability" "%" "$_d_precipIntensitiyMaxTime"
 _d_precipType="$(jq -r '.daily.data[0].precipType' $_weatherData)" && \
     printf "%s:\t\t%s\n" "  Precip Type" "$_d_precipType"

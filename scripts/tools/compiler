@@ -31,7 +31,8 @@ case "$file" in
 	*\.mom) refer -PS -e "$file" | groff -mom -kejpt -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
 	*\.tex) textype "$file" ;;
-	*\.md) pandoc "$file" --pdf-engine=pdflatex --filter pandoc-citeproc -o "$base".pdf ;;
+	# *\.md) pandoc "$file" --pdf-engine=pdflatex --filter pandoc-citeproc -o "$base".pdf ;;
+	*\.md) pandoc "$file" -o "$base".pdf ;;
 	*config.h) sudo make install ;;
     *\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;

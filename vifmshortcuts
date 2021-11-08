@@ -59,6 +59,14 @@ map gmn :cd /mnt<CR>
 map tmn <tab>:cd /mnt<CR><tab>
 map Mmn <tab>:cd /mnt<CR><tab>:mo<CR>
 map Ymn <tab>:cd /mnt<CR><tab>:co<CR>
+map gco :cd ~/code<CR>
+map tco <tab>:cd ~/code<CR><tab>
+map Mco <tab>:cd ~/code<CR><tab>:mo<CR>
+map Yco <tab>:cd ~/code<CR><tab>:co<CR>
+map gwk :cd ~/Documents/2.Admin/Work_studies<CR>
+map twk <tab>:cd ~/Documents/2.Admin/Work_studies<CR><tab>
+map Mwk <tab>:cd ~/Documents/2.Admin/Work_studies<CR><tab>:mo<CR>
+map Ywk <tab>:cd ~/Documents/2.Admin/Work_studies<CR><tab>:co<CR>
 map bf :e ~/.config/bmfiles<CR>
 map bd :e ~/.config/bmdirs<CR>
 map cfb :e ~/.bashrc<CR>

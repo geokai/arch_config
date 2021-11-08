@@ -24,9 +24,14 @@ if [ -f "$HOME/.config/bash-git-prompt/gitprompt.sh" ]; then
     source "$HOME"/.config/bash-git-prompt/gitprompt.sh
 fi
 
+# Make pypi2pkgbuild easier - creating/installing PKGBUILD
+alias pypi2pkgalias='PKGEXT=.pkg.tar pypi2pkgbuild.py -g cython -b
+/tmp/pypi2pkgbuild/ -f'
+
 # virtual environment management - python:
 # set up directory location for venv directories:
 export VENV_DIR="$HOME/bin/virtualenvs/"
+export SYSTEMD_EDITOR=nvim
 
 # create virtualenv dir if it does not exist:
 if [[ ! -d $VENV_DIR ]]; then
