@@ -1,7 +1,7 @@
 # ArchLinux Dotfiles
 
 This config setup is originally forked from Luke Smiths' [LARBS](https://github.com/LukeSmithxyz/LARBS)
-as it stood in January 2018.
+as it stood in January 2019.
 
 
 ## Programs whose configs can be found here
